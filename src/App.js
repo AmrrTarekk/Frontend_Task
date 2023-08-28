@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import Search from "./components/Search/Search";
+import EmpCards from "./components/Cards/EmpCards";
 const { Header, Content, Footer, Sider } = Layout;
 const items = [
   VideoCameraOutlined,
@@ -85,10 +86,9 @@ const App = () => {
             style={{
               padding: 24,
               textAlign: "center",
-              background: colorBgContainer,
             }}
           >
-            <p>long content</p>
+            <EmpCards />
             {/* Cards of Employee */}
           </div>
         </Content>

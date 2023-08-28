@@ -1,6 +1,6 @@
-:where(.css-dev-only-do-not-override-17a39f8).ant-modal .ant-modal-title {
+.ant-modal-title {
   color: #23aaeb !important;
-  letter-spacing: 1.1px;
+  letter-spacing: 1.1px !important;
 }
 .Line-164 {
   width: 100%;
@@ -25,16 +25,6 @@
   color: #23aaeb;
   padding: 0;
 }
-
-/* .personal-info::after {
-  content: "";
-  display: block;
-  width: 4.5%;
-  border-bottom: 4px solid rgba(35, 170, 235, 0.14);
-  border-bottom-right-radius: 30%;
-  border-bottom-left-radius: 30%;
-} */
-
 .Rectangle-971 {
   width: 4.5%;
   height: 4px;
@@ -85,32 +75,24 @@
   cursor: pointer;
 }
 
-:where(.css-dev-only-do-not-override-17a39f8).ant-form-vertical
-  .ant-form-item-label,
-:where(.css-dev-only-do-not-override-17a39f8).ant-col-24.ant-form-item-label,
-:where(
-    .css-dev-only-do-not-override-17a39f8
-  ).ant-col-xl-24.ant-form-item-label {
+.ant-form-item-label {
   padding: 0 0 3px !important;
 }
-:where(.css-dev-only-do-not-override-17a39f8).ant-form-item {
-  margin-bottom: 0.5rem;
+.ant-form-item {
+  margin-bottom: 0.5rem !important;
 }
-
-:where(.css-dev-only-do-not-override-17a39f8).ant-btn-primary {
+.ant-modal-footer .ant-btn-primary {
   background-color: #23aaeb !important;
   width: 85px;
   height: 30px;
 }
-
-:where(.css-dev-only-do-not-override-17a39f8).ant-btn-default {
+.ant-modal-footer .ant-btn-default {
   background-color: #ff6a6a !important;
   color: #fff !important;
   width: 85px;
   height: 30px;
 }
-
-:where(.css-dev-only-do-not-override-17a39f8).ant-modal-root .ant-modal-mask {
+.ant-modal-wrap {
   background-color: rgba(40, 104, 174, 0.43) !important;
   backdrop-filter: blur(2px);
 }
@@ -118,16 +100,9 @@ input[type="checkbox"] {
   width: 14px;
   height: 14px;
 }
-
 .ant-modal-close {
   display: none;
 }
-
-:where(.css-dev-only-do-not-override-17a39f8).ant-form-vertical
-  .ant-form-item-label,
-:where(.css-dev-only-do-not-override-17a39f8).ant-col-24.ant-form-item-label,
-:where(
-    .css-dev-only-do-not-override-17a39f8
-  ).ant-col-xl-24.ant-form-item-label {
-  white-space: nowrap;
+.ant-form-item-label label {
+  white-space: nowrap !important;
 }

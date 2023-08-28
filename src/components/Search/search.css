@@ -1,4 +1,9 @@
-input{
-    width: 100%;
+input {
+  width: 100%;
 }
 
+.ant-input-prefix {
+  color: #23aaeb !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}

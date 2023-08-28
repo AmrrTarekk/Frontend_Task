@@ -1,3 +1,9 @@
+.addNewBtn {
+  width: 101px !important;
+  height: 30px !important;
+  background-color: #2764ac !important;
+  font-weight: 400 !important;
+}
 .ant-modal-title {
   color: #23aaeb !important;
   letter-spacing: 1.1px !important;

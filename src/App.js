@@ -1,33 +1,33 @@
 import React from "react";
 import "./App.css";
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { AppstoreFilled } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Layout, Menu, theme } from "antd";
 import Search from "./components/Search/Search";
 import EmpCards from "./components/Cards/EmpCards";
+import {
+  faDisplay,
+  faHandsHolding,
+  faMugSaucer,
+  faUserGroup,
+} from "@fortawesome/free-solid-svg-icons";
 const { Header, Content, Footer, Sider } = Layout;
+function getItem(label, key, icon, children) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  };
+}
 const items = [
-  VideoCameraOutlined,
-  UserOutlined,
-  UploadOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  AppstoreOutlined,
-  TeamOutlined,
-  ShopOutlined,
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: `nav ${index + 1}`,
-}));
+  getItem("Dashboard", "1", <AppstoreFilled />),
+  getItem("Workplace", "2", <FontAwesomeIcon icon={faDisplay} />),
+  getItem("Holidays", "3", <FontAwesomeIcon icon={faMugSaucer} />),
+  getItem("Employees", "4", <FontAwesomeIcon icon={faUserGroup} />),
+  getItem("Inbound Requests", "5", <FontAwesomeIcon icon={faHandsHolding} />),
+];
+
 const App = () => {
   const {
     token: { colorBgContainer },
@@ -35,7 +35,7 @@ const App = () => {
   return (
     <Layout hasSider>
       <Sider
-        className="sider"
+        className="Rectangle-898"
         style={{
           overflow: "auto",
           height: "100vh",
@@ -49,7 +49,7 @@ const App = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["4"]}
+          defaultSelectedKeys={["2"]}
           items={items}
         />
       </Sider>
@@ -65,19 +65,14 @@ const App = () => {
             background: colorBgContainer,
           }}
         />
-        <Content
-          style={{
-            margin: "24px 16px 0",
-            overflow: "initial",
-          }}
-        >
-          <div className="mb-5">
-            {/* Search Bar and button  */}
-            <Search />
-          </div>
-          <div className="mb-5 ">
-            <EmpCards />
-            {/* Cards of Employee */}
+        <Content style={{ backgroundColor: "#fff", height: "100vh" }}>
+          <div className="wrapper">
+            <div className="mb-5">
+              <Search />
+            </div>
+            <div className="mb-5 ">
+              <EmpCards />
+            </div>
           </div>
         </Content>
       </Layout>

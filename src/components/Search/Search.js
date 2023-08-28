@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import { Button, Input, Modal } from "antd";
 import "./search.css";
 import EmpForm from "../Form/EmpForm";
 import useEmp from "../../hooks/useEmp";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function Search() {
   const { query, setQuery } = useEmp();
@@ -12,12 +14,13 @@ function Search() {
   };
   return (
     <div className="d-flex justify-content-between gap-2">
-      <input
+      <Input
+        className="rounded-2"
         type="text"
-        className="rounded-2 border-0"
-        placeholder="Search Employee"
+        placeholder="Search"
         value={query}
         onChange={handleSearch}
+        prefix={<FontAwesomeIcon icon={faMagnifyingGlass} />}
       />
       <EmpForm />
     </div>

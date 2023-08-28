@@ -31,13 +31,13 @@ function EmpCards() {
   return (
     <div className="d-flex flex-wrap gap-3">
       {filteredEmployee.map((emp) => (
-        <Card className="Path-120" style={{ width: "25rem" }} key={emp.id}>
+        <Card className="Path-120" style={{ width: "24rem" }} key={emp.id}>
           <div className="HR---Employees3 d-flex  ">
             <div>
               {emp.selectedImage && (
                 <div className=" d-flex flex-column justify-content-center align-items-center  mt-3 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
                   <img
-                    className="rounded-2 w-75"
+                    className=""
                     variant="top"
                     src={URL.createObjectURL(emp.selectedImage)}
                   />
@@ -55,18 +55,18 @@ function EmpCards() {
                 </div>
               )}
             </div>
-            <div class="Line-200"></div>
+            <div className="Line-200"></div>
             <div className="d-flex flex-column w-100">
               <h5 className="mb-1">
-                <span class="sara-khaled-ahmed">{emp.name}</span>
+                <span className="sara-khaled-ahmed">{emp.name}</span>
               </h5>
               <div className="d-flex flex-column mb-0">
-                <span class="HR-Head">{emp.position}</span>
-                <span class="business-development">{emp.department}</span>
+                <span className="HR-Head">{emp.position}</span>
+                <span className="business-development">{emp.department}</span>
               </div>
               <div className="d-flex justify-content-between">
-                <div class="Rectangle-1520">
-                  <span class="present">present</span>
+                <div className="Rectangle-1520">
+                  <span className="present">present</span>
                 </div>
 
                 <div className="contacts d-flex flex-row gap-2">

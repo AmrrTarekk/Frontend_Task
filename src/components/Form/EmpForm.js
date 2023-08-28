@@ -13,6 +13,8 @@ import {
 import "./EmpForm.css";
 import useEmp from "../../hooks/useEmp";
 import { useDropzone } from "react-dropzone";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -121,7 +123,12 @@ function EmpForm() {
 
   return (
     <div>
-      <Button type="primary" onClick={() => setOpen(true)}>
+      <Button
+        type="primary"
+        className="addNewBtn d-flex flex-row gap-1 align-items-center"
+        onClick={() => setOpen(true)}
+      >
+        <FontAwesomeIcon icon={faPlus} />
         Add new
       </Button>
       <Modal
@@ -329,7 +336,7 @@ function EmpForm() {
             <h5 className="personal-info mt-1">
               Work From Home<div className="Rectangle-973"></div>
             </h5>
-            <div className="col-6 mt-2 ">
+            <div className="col-12 mt-2 ">
               <div className="d-flex align-items-center gap-2">
                 <input type="checkbox" id="WFH" name="WFH" />
                 <label htmlFor="WFH">

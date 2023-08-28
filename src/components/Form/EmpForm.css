@@ -1,3 +1,133 @@
-:where(.css-dev-only-do-not-override-17a39f8).ant-modal .ant-modal-title{
-    color: blue !important;
+:where(.css-dev-only-do-not-override-17a39f8).ant-modal .ant-modal-title {
+  color: #23aaeb !important;
+  letter-spacing: 1.1px;
+}
+.Line-164 {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: solid 1px #23aaeb;
+}
+.Line-165 {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: solid 1px #d2d2d2;
+}
+
+.personal-info {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 1px 36px 3px 15px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  color: #23aaeb;
+  padding: 0;
+}
+
+/* .personal-info::after {
+  content: "";
+  display: block;
+  width: 4.5%;
+  border-bottom: 4px solid rgba(35, 170, 235, 0.14);
+  border-bottom-right-radius: 30%;
+  border-bottom-left-radius: 30%;
+} */
+
+.Rectangle-971 {
+  width: 4.5%;
+  height: 4px;
+  margin-top: 0.1rem;
+  border-radius: 3px;
+  background-color: rgba(35, 170, 235, 0.14);
+}
+.Rectangle-972 {
+  width: 5%;
+  height: 4px;
+  margin-top: 0.1rem;
+  border-radius: 3px;
+  background-color: rgba(35, 170, 235, 0.14);
+}
+.Rectangle-973 {
+  width: 5%;
+  height: 4px;
+  margin-top: 0.1rem;
+  border-radius: 3px;
+  background-color: rgba(35, 170, 235, 0.14);
+}
+
+.DRAG-IMAGE-HERE {
+  width: 136px;
+  height: 30px;
+  margin: 0 auto;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: 1.73px;
+  text-align: left;
+  color: #5c6974;
+  text-align: center;
+}
+
+.dragBox {
+  width: 100%;
+  height: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgba(0, 0, 0, 0.16);
+  margin: 0 0 0 2px;
+  text-align: center;
+  cursor: pointer;
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-form-vertical
+  .ant-form-item-label,
+:where(.css-dev-only-do-not-override-17a39f8).ant-col-24.ant-form-item-label,
+:where(
+    .css-dev-only-do-not-override-17a39f8
+  ).ant-col-xl-24.ant-form-item-label {
+  padding: 0 0 3px !important;
+}
+:where(.css-dev-only-do-not-override-17a39f8).ant-form-item {
+  margin-bottom: 0.5rem;
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-btn-primary {
+  background-color: #23aaeb !important;
+  width: 85px;
+  height: 30px;
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-btn-default {
+  background-color: #ff6a6a !important;
+  color: #fff !important;
+  width: 85px;
+  height: 30px;
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-modal-root .ant-modal-mask {
+  background-color: rgba(40, 104, 174, 0.43) !important;
+  backdrop-filter: blur(2px);
+}
+input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+}
+
+.ant-modal-close {
+  display: none;
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-form-vertical
+  .ant-form-item-label,
+:where(.css-dev-only-do-not-override-17a39f8).ant-col-24.ant-form-item-label,
+:where(
+    .css-dev-only-do-not-override-17a39f8
+  ).ant-col-xl-24.ant-form-item-label {
+  white-space: nowrap;
 }

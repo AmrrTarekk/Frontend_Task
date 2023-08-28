@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
-import { Button, Modal, Form, Input, Radio, DatePicker, Space } from "antd";
+import {
+  Button,
+  Modal,
+  Form,
+  Input,
+  Select,
+  DatePicker,
+  Space,
+  Checkbox,
+} from "antd";
 import "./EmpForm.css";
 import useEmp from "../../hooks/useEmp";
+import { useDropzone } from "react-dropzone";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -14,8 +24,11 @@ function EmpForm() {
   const [empName, setEmpName] = useState("");
   const [phone, setPhone] = useState();
   const [empEmail, setEmpEmail] = useState("");
-  const [department, setDepartment] = useState("");
-  const [position, setPosition] = useState("");
+  const [department, setDepartment] = useState("Select");
+  const [office, setOffice] = useState("Select");
+  const [attendance, setAttendance] = useState("Select");
+  const [role, setRole] = useState("Select");
+  const [position, setPosition] = useState("Select");
   const [selectedImage, setSelectedImage] = useState(null);
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -32,6 +45,15 @@ function EmpForm() {
   const onRequiredTypeChange = ({ requiredMarkValue }) => {
     setRequiredMarkType(requiredMarkValue);
   };
+
+  const handleDrop = (acceptedFiles) => {
+    console.log(acceptedFiles[0]);
+    setSelectedImage(acceptedFiles[0]);
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: handleDrop,
+  });
 
   const handleSubmit = () => {
     console.log("first");
@@ -76,9 +98,6 @@ function EmpForm() {
   };
 
   useEffect(() => {
-    console.log(selectedDate);
-  }, [selectedDate]);
-  useEffect(() => {
     if (
       empName === "" ||
       phone === "" ||
@@ -112,7 +131,9 @@ function EmpForm() {
         onOk={form.submit}
         onCancel={() => setOpen(false)}
         width={1000}
+        okText="Save"
       >
+        <div className="Line-164 mb-1"></div>
         <Form
           form={form}
           layout="vertical"
@@ -124,8 +145,11 @@ function EmpForm() {
           onFinish={handleSubmit}
         >
           <div className="row">
-            <h5>Personal Info</h5>
-            <div className="col-4">
+            <h5 className="personal-info mt-1">
+              Personal Info<div className="Rectangle-971"></div>
+            </h5>
+            {/* Image Uploader */}
+            <div className="col-4 ">
               {selectedImage && (
                 <div className="text-center w-100 d-flex flex-column gap-2 justify-content-center align-items-center ">
                   <img
@@ -143,28 +167,30 @@ function EmpForm() {
                 </div>
               )}
               {!selectedImage && (
-                <Form.Item
-                  label="Profile Picture"
-                  required
-                  tooltip="This is a required field"
-                >
-                  <input
-                    type="file"
-                    name="myImage"
-                    onChange={(event) => {
-                      console.log(event.target.files[0]);
-                      setSelectedImage(event.target.files[0]);
-                    }}
-                  />
+                <Form.Item className="dragBox mt-2 " label="">
+                  <div
+                    {...getRootProps()}
+                    className={`drop-zone ${isDragActive ? "dragging" : ""}`}
+                  >
+                    <input {...getInputProps()} />
+                    {isDragActive ? (
+                      <span className="DRAG-IMAGE-HERE">DRAG IMAGE HERE</span>
+                    ) : (
+                      <span className="DRAG-IMAGE-HERE">DRAG IMAGE HERE</span>
+                    )}
+                  </div>
                 </Form.Item>
               )}
             </div>
-            <div className="col-4">
+            <div className="col-4 ml-0">
               {/*  Name */}
               <Form.Item
                 label="Name"
                 required
-                tooltip="This is a required field"
+                tooltip={{
+                  title: "Required",
+                  icon: <InfoCircleOutlined />,
+                }}
               >
                 <Input
                   onChange={(e) => setEmpName(e.target.value)}
@@ -177,7 +203,7 @@ function EmpForm() {
                 label="Phone"
                 required
                 tooltip={{
-                  title: "Tooltip with customize icon",
+                  title: "Required",
                   icon: <InfoCircleOutlined />,
                 }}
               >
@@ -194,12 +220,13 @@ function EmpForm() {
                 label="Start Date"
                 required
                 tooltip={{
-                  title: "Tooltip with customize icon",
+                  title: "Required",
                   icon: <InfoCircleOutlined />,
                 }}
               >
-                <Space direction="vertical">
+                <Space direction="vertical" className="w-100">
                   <DatePicker
+                    className="w-100"
                     value={selectedDate}
                     onChange={handleDateChange}
                   />
@@ -210,7 +237,7 @@ function EmpForm() {
                 label="Email"
                 required
                 tooltip={{
-                  title: "Tooltip with customize icon",
+                  title: "Required",
                   icon: <InfoCircleOutlined />,
                 }}
               >
@@ -223,43 +250,96 @@ function EmpForm() {
             </div>
           </div>
           <div className="row">
-            <h5>Office Info</h5>
-
-            <div className="col-6">
-              {/*  Department */}
-              <Form.Item
-                label="Department "
-                required
-                tooltip="This is a required field"
-              >
-                <Input
-                  onChange={(e) => setDepartment(e.target.value)}
-                  value={department}
-                  placeholder="Enter you Department"
-                />
+            <h5 className="personal-info mt-1">
+              Office Info<div className="Rectangle-972"></div>
+            </h5>
+            {/*  Office */}
+            <div className="col-12">
+              <Form.Item label="Office">
+                <Select value={office} onChange={(e) => setOffice(e)}>
+                  <Select.Option value="Arabic Localizer">
+                    Arabic Localizer
+                  </Select.Option>
+                </Select>
               </Form.Item>
             </div>
+            {/*  Department */}
             <div className="col-6">
-              {/* Position */}
               <Form.Item
-                label="Position"
                 required
                 tooltip={{
-                  title: "Tooltip with customize icon",
+                  title: "Required",
                   icon: <InfoCircleOutlined />,
                 }}
+                label="Department"
               >
-                <Input
-                  onChange={(e) => setPosition(e.target.value)}
-                  value={position}
-                  placeholder="Enter you Position"
-                />
+                <Select value={department} onChange={(e) => setDepartment(e)}>
+                  <Select.Option value="Backend Team">
+                    Backend Team
+                  </Select.Option>
+                  <Select.Option value="Frontend Team">
+                    Frontend Team
+                  </Select.Option>
+                  <Select.Option value="Bussiness Development">
+                    Bussiness Development
+                  </Select.Option>
+                </Select>
+              </Form.Item>
+            </div>
+            {/*  Attendance Profile */}
+            <div className="col-6">
+              <Form.Item label="Attendance Profile">
+                <Select value={attendance} onChange={(e) => setAttendance(e)}>
+                  <Select.Option value="none">none</Select.Option>
+                </Select>
+              </Form.Item>
+            </div>
+            {/*  Role */}
+            <div className="col-6">
+              <Form.Item label="Role">
+                <Select value={role} onChange={(e) => setRole(e)}>
+                  <Select.Option value="Employee">Employee</Select.Option>
+                </Select>
+              </Form.Item>
+            </div>
+            {/* Position */}
+            <div className="col-6">
+              <Form.Item
+                required
+                tooltip={{
+                  title: "Required",
+                  icon: <InfoCircleOutlined />,
+                }}
+                label="Position"
+              >
+                <Select value={position} onChange={(e) => setPosition(e)}>
+                  <Select.Option value="Backend Developer">
+                    Backend Developer
+                  </Select.Option>
+                  <Select.Option value="Frontend Developer">
+                    Frontend Developer
+                  </Select.Option>
+                  <Select.Option value="HR Head">HR Head</Select.Option>
+                  <Select.Option value="HR">HR</Select.Option>
+                </Select>
               </Form.Item>
             </div>
           </div>
-          <Form.Item className="d-flex justify-content-center">
-            <Button type="primary">Submit</Button>
-          </Form.Item>
+          <div className="row">
+            <h5 className="personal-info mt-1">
+              Work From Home<div className="Rectangle-973"></div>
+            </h5>
+            <div className="col-6 mt-2 ">
+              <div className="d-flex align-items-center gap-2">
+                <input type="checkbox" id="WFH" name="WFH" />
+                <label htmlFor="WFH">
+                  <b>Allow Employee To Work From Home</b>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div className="Line-165 mt-2"></div>
         </Form>
       </Modal>
     </div>

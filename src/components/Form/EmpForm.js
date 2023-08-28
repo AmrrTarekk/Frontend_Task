@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Button, Modal, Form, Input, Radio, DatePicker, Space } from "antd";
 import "./EmpForm.css";
+import useEmp from "../../hooks/useEmp";
+
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 function EmpForm() {
   const [open, setOpen] = useState(false);
-  //   const [selectedImage, setSelectedImage] = useState(null);
+  const { handleAddEmployee } = useEmp();
+
+  const [empName, setEmpName] = useState("");
+  const [phone, setPhone] = useState();
+  const [empEmail, setEmpEmail] = useState("");
+  const [department, setDepartment] = useState("");
+  const [position, setPosition] = useState("");
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [dateContext, setDateContext] = useState("");
+  const [err, setErr] = useState(false);
+
   const handleDateChange = (date, dateString) => {
     setSelectedDate(date);
     setDateContext(dateString);
@@ -18,12 +31,74 @@ function EmpForm() {
   const onRequiredTypeChange = ({ requiredMarkValue }) => {
     setRequiredMarkType(requiredMarkValue);
   };
+
+  const handleSubmit = () => {
+    console.log("first");
+    if (
+      empName === "" ||
+      phone === "" ||
+      empEmail === "" ||
+      department === "" ||
+      position === "" ||
+      selectedDate === null
+    ) {
+      setErr(true);
+      return;
+    }
+    handleAddEmployee(
+      empName,
+      empEmail,
+      phone,
+      department,
+      position,
+      dateContext.split("-")
+    );
+    console.log(
+      empName,
+      empEmail,
+      phone,
+      department,
+      position,
+      dateContext.split("-")
+    );
+    setEmpEmail("");
+    setEmpName("");
+    setDepartment("");
+    setSelectedDate(null);
+    setPhone("");
+    setPosition("");
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    console.log(selectedDate);
+  }, [selectedDate]);
+  useEffect(() => {
+    if (
+      empName === "" ||
+      phone === "" ||
+      empEmail === "" ||
+      department === "" ||
+      position === "" ||
+      selectedDate === null
+    ) {
+      setErr(false);
+    }
+  }, [empName, phone, empEmail, department, position, selectedDate]);
+
   return (
     <div>
       <Button type="primary" onClick={() => setOpen(true)}>
         Add new
       </Button>
-      <Modal title="NEW EMPLOYEE" centered open={open} width={1000}>
+      <Modal
+        title="NEW EMPLOYEE"
+        centered
+        open={open}
+        onOk={form.submit}
+        onCancel={() => setOpen(false)}
+        width={1000}
+      >
         <Form
           form={form}
           layout="vertical"
@@ -32,6 +107,7 @@ function EmpForm() {
           }}
           onValuesChange={onRequiredTypeChange}
           requiredMark={requiredMark}
+          onFinish={handleSubmit}
         >
           <div className="row">
             <h5>Personal Info</h5>
@@ -43,7 +119,11 @@ function EmpForm() {
                 required
                 tooltip="This is a required field"
               >
-                <Input placeholder="Enter you full name" />
+                <Input
+                  onChange={(e) => setEmpName(e.target.value)}
+                  value={empName}
+                  placeholder="Enter you full name"
+                />
               </Form.Item>
               {/* Phone */}
               <Form.Item
@@ -54,7 +134,11 @@ function EmpForm() {
                   icon: <InfoCircleOutlined />,
                 }}
               >
-                <Input placeholder="01... " />
+                <Input
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
+                  placeholder="01... "
+                />
               </Form.Item>
             </div>
             <div className="col-4">
@@ -83,7 +167,11 @@ function EmpForm() {
                   icon: <InfoCircleOutlined />,
                 }}
               >
-                <Input placeholder="Enter you email" />
+                <Input
+                  onChange={(e) => setEmpEmail(e.target.value)}
+                  value={empEmail}
+                  placeholder="Enter you email"
+                />
               </Form.Item>
             </div>
           </div>
@@ -97,7 +185,11 @@ function EmpForm() {
                 required
                 tooltip="This is a required field"
               >
-                <Input placeholder="Enter you Department" />
+                <Input
+                  onChange={(e) => setDepartment(e.target.value)}
+                  value={department}
+                  placeholder="Enter you Department"
+                />
               </Form.Item>
             </div>
             <div className="col-6">
@@ -110,7 +202,11 @@ function EmpForm() {
                   icon: <InfoCircleOutlined />,
                 }}
               >
-                <Input placeholder="Enter you Position" />
+                <Input
+                  onChange={(e) => setPosition(e.target.value)}
+                  value={position}
+                  placeholder="Enter you Position"
+                />
               </Form.Item>
             </div>
           </div>

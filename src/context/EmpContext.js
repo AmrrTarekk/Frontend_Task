@@ -23,7 +23,6 @@ export const EmpProvider = ({ children }) => {
         department,
         position,
         id: crypto.randomUUID(),
-
         year: date[0],
         month: date[1],
         day: date[2],

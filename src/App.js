@@ -81,7 +81,7 @@ const App = () => {
         className="Rectangle-898"
         style={{
           overflow: "auto",
-          height: "100vh",
+          height: "80vh",
           position: "fixed",
           left: 0,
           top: 0,
@@ -136,7 +136,7 @@ const App = () => {
             </div>
           </div>
         </Header>
-        <Content style={{ backgroundColor: "#fff", height: "100vh" }}>
+        <Content style={{ backgroundColor: "#fff", height: "90vh" }}>
           <div className="wrapper">
             <div className="mb-5">
               <Search />

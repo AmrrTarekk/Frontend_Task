@@ -28,6 +28,25 @@
   color: #61dafb;
 }
 
+
+/* .sider{
+  width: 106px !important;
+  min-width: 106px !important;
+  max-width: 150px !important;
+
+} */
+
+.sider {
+  width: 106px !important;
+  min-width: 106px   !important; 
+  height: 1291px !important;
+  margin: 0 !important;
+  padding: 72.5px 0 761px !important;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16) !important;
+  background-image: linear-gradient(to bottom, #39a4dc, #2763ab) !important;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

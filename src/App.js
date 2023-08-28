@@ -71,23 +71,11 @@ const App = () => {
             overflow: "initial",
           }}
         >
-          <div
-            className="mb-5"
-            style={{
-              padding: 5,
-              textAlign: "center",
-            }}
-          >
+          <div className="mb-5">
             {/* Search Bar and button  */}
             <Search />
           </div>
-          <div
-            className="mb-5"
-            style={{
-              padding: 24,
-              textAlign: "center",
-            }}
-          >
+          <div className="mb-5 ">
             <EmpCards />
             {/* Cards of Employee */}
           </div>

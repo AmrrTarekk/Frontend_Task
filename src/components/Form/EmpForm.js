@@ -16,6 +16,7 @@ function EmpForm() {
   const [empEmail, setEmpEmail] = useState("");
   const [department, setDepartment] = useState("");
   const [position, setPosition] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [dateContext, setDateContext] = useState("");
@@ -40,17 +41,19 @@ function EmpForm() {
       empEmail === "" ||
       department === "" ||
       position === "" ||
-      selectedDate === null
+      selectedDate === null ||
+      selectedImage === null
     ) {
       setErr(true);
       return;
     }
     handleAddEmployee(
       empName,
-      empEmail,
       phone,
+      empEmail,
       department,
       position,
+      selectedImage,
       dateContext.split("-")
     );
     console.log(
@@ -59,14 +62,16 @@ function EmpForm() {
       phone,
       department,
       position,
+      selectedImage,
       dateContext.split("-")
     );
     setEmpEmail("");
     setEmpName("");
     setDepartment("");
-    setSelectedDate(null);
     setPhone("");
     setPosition("");
+    setSelectedDate(null);
+    setSelectedImage(null);
     setOpen(false);
   };
 
@@ -80,11 +85,20 @@ function EmpForm() {
       empEmail === "" ||
       department === "" ||
       position === "" ||
-      selectedDate === null
+      selectedDate === null ||
+      selectedImage === null
     ) {
       setErr(false);
     }
-  }, [empName, phone, empEmail, department, position, selectedDate]);
+  }, [
+    empName,
+    phone,
+    empEmail,
+    department,
+    position,
+    selectedDate,
+    selectedImage,
+  ]);
 
   return (
     <div>
@@ -111,7 +125,40 @@ function EmpForm() {
         >
           <div className="row">
             <h5>Personal Info</h5>
-            <div className="col-4"></div>
+            <div className="col-4">
+              {selectedImage && (
+                <div className="text-center w-100 d-flex flex-column gap-2 justify-content-center align-items-center ">
+                  <img
+                    alt="not found"
+                    width={"70%"}
+                    src={URL.createObjectURL(selectedImage)}
+                  />
+                  <Button
+                    type="primary"
+                    className=" text-center"
+                    onClick={() => setSelectedImage(null)}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              )}
+              {!selectedImage && (
+                <Form.Item
+                  label="Profile Picture"
+                  required
+                  tooltip="This is a required field"
+                >
+                  <input
+                    type="file"
+                    name="myImage"
+                    onChange={(event) => {
+                      console.log(event.target.files[0]);
+                      setSelectedImage(event.target.files[0]);
+                    }}
+                  />
+                </Form.Item>
+              )}
+            </div>
             <div className="col-4">
               {/*  Name */}
               <Form.Item

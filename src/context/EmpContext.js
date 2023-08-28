@@ -9,10 +9,11 @@ export const EmpProvider = ({ children }) => {
   const handleAddEmployee = (
     empName,
     empPhone,
-    date,
     empEmail,
     department,
-    position
+    position,
+    selectedImage,
+    date
   ) => {
     setEmployees((employees) => [
       ...employees,
@@ -22,13 +23,13 @@ export const EmpProvider = ({ children }) => {
         email: empEmail,
         department,
         position,
+        selectedImage: selectedImage,
         id: crypto.randomUUID(),
         year: date[0],
         month: date[1],
         day: date[2],
       },
     ]);
-    console.log(employees, "employeesContext");
   };
 
   let filteredEmployee = employees;

@@ -1,0 +1,131 @@
+.Path-120 {
+  width: 401px;
+  height: 106.8px;
+  margin: 0 0%;
+  padding: 11px 13px 11.8px 18.9px;
+  box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.09);
+  border: solid 1px #eaeef0;
+  background-color: white;
+}
+
+.HR---Employees3 {
+  /* width: 1920px; */
+  height: 1291px;
+  padding: 0 0px 0 0;
+  background-color: white;
+}
+
+.Profile-Picture-Pauline-Suy-circle-ScripturaEngage {
+  width: 64px;
+  height: 64px;
+  margin: 0 21.5px 1px 0.1px;
+}
+.Line-200 {
+  width: 0;
+  height: 79px;
+  margin: 4.5px 0 0.5px;
+  opacity: 0.22;
+  border: solid 0.5px #8997a4;
+}
+.icons {
+  color: #8997a4;
+  font-size: 0.6rem;
+}
+.icons span {
+  cursor: pointer;
+}
+.sara-khaled-ahmed {
+  width: 188px;
+  height: 24px;
+  margin: 1px 1px 3px 23.5px;
+  font-family: Lato-800;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 1.2;
+  letter-spacing: 1.1px;
+  text-align: left;
+  color: #5c6974;
+}
+.HR-Head {
+  width: 55px;
+  height: 15px;
+  margin: 1px 1px 0px 23.5px;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: 0.72px;
+  text-align: left;
+  color: #313030;
+}
+.business-development {
+  width: 113px;
+  height: 13px;
+  margin: 1px 1px 5px 23.5px;
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.3;
+  letter-spacing: 0.55px;
+  text-align: left;
+  color: #5c6974;
+}
+.Rectangle-1520 {
+  width: 57px;
+  height: 17px;
+  margin: 1px 1px 3px 23.5px;
+  padding: 2px 7px 2px 9px;
+  border-radius: 2px;
+  color: #27b40c;
+  background-color: #dcf3d7;
+}
+.present {
+  display: block;
+  width: 41px;
+  height: 13px;
+  font-family: Lato;
+  font-size: 11px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.18;
+  letter-spacing: 0.61px;
+  text-align: left;
+}
+.rotate-135 {
+  transform: rotate(135deg) !important;
+}
+.info-icons {
+  background-color: #eaeef0;
+  border-radius: 50%;
+  font-size: 10px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.info {
+  font-size: 13px;
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-tooltip .ant-tooltip-inner {
+  background-color: white;
+  color: black;
+  --antd-arrow-background-color: white;
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-tooltip {
+  --antd-arrow-background-color: white;
+}
+@media (min-width: 768px) {
+  .w-md-100 {
+    width: 100% !important;
+  }
+}

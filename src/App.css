@@ -159,7 +159,7 @@
     margin-top: 0 !important;
   }
 }
-@media (max-width: 668px) {
+@media (max-width: 510px) {
   .ant-menu-item .ant-menu-item-icon {
     font-size: 1.3rem !important;
     padding-left: 10px !important;

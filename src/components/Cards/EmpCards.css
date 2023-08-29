@@ -131,15 +131,17 @@
   font-size: 13px;
 }
 
-:where(.css-dev-only-do-not-override-17a39f8).ant-tooltip .ant-tooltip-inner {
+.ant-tooltip {
+  --antd-arrow-background-color: white;
+}
+
+.ant-tooltip .ant-tooltip-inner {
   background-color: white;
   color: black;
   --antd-arrow-background-color: white;
 }
 
-:where(.css-dev-only-do-not-override-17a39f8).ant-tooltip {
-  --antd-arrow-background-color: white;
-}
+
 
 .ant-tooltip {
   max-width: 280px !important;

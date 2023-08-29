@@ -11,7 +11,6 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import {
   faBell,
-  faChevronDown,
   faDisplay,
   faHandsHolding,
   faMugSaucer,
@@ -20,6 +19,7 @@ import {
 import profilePic from "./profile.jpg";
 import { Toaster } from "react-hot-toast";
 import { Offcanvas } from "react-bootstrap";
+import useEmp from "./hooks/useEmp";
 
 const today = new Date();
 function formatDate(date) {
@@ -58,8 +58,8 @@ const items = [
 ];
 
 const App = () => {
-  let current_time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const { filteredEmployee } = useEmp();
+
   const getTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -116,84 +116,6 @@ const App = () => {
           }}
           className="d-flex justify-content-end"
         >
-          {/* <div className="header">
-            <div>
-              {day}, {formatDate(today)} {getTime(today)}
-            </div>
-            <div>
-              <Button type="primary" className="signInBtn">
-                Sign In
-              </Button>
-            </div>
-            <div className="Line-4"></div>
-            <div className="bellIcon">
-              <FontAwesomeIcon icon={faBell} />
-            </div>
-            <div className="Line-4"></div>
-            <div className="profileCont d-flex flex-row justify-content-center flex-nowrap gap-1">
-              <div className="imageDiv">
-                <img
-                  alt="profilePic"
-                  className=""
-                  src={profilePic}
-                  variant="top"
-                />
-              </div>
-              <p>Amr Tarek</p>
-              <span className="dropIcon">
-                <FontAwesomeIcon icon={faChevronDown} />
-              </span>
-            </div>
-            <div className="dropIcon pb-2">
-              <FontAwesomeIcon icon={faChevronDown} />
-            </div>
-          </div> */}
-
-          {/* <Navbar
-            collapseOnSelect
-            expand="lg"
-            className="bg-body-tertiary h-100 navbg"
-          >
-            <Container className="">
-              <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
-              <Navbar.Toggle aria-controls="responsive-navbar-nav " />
-              <Navbar.Collapse id="responsive-navbar-nav ">
-                <Nav className="me-auto ">
-                  <Navbar.Text>
-                    {day}, {formatDate(today)} {getTime(today)}
-                  </Navbar.Text>
-                  <Nav.Link>
-                    <Button type="primary" className="signInBtn">
-                      Sign In
-                    </Button>
-                  </Nav.Link>
-                  <Navbar.Text className="d-flex align-items-center gap-2 flex-wrap mx-2">
-                    <div className="Line-4"></div>
-                    <div className="d-flex position-relative ">
-                      <FontAwesomeIcon className="fs-5" icon={faBell} />
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger bg-notif ">
-                        1
-                      </span>
-                    </div>
-                    <div className="Line-4"></div>
-                  </Navbar.Text>
-                  <Navbar.Text className="mr-2">
-                    <div className="imageDiv">
-                      <img
-                        alt="profilePic"
-                        className=""
-                        src={profilePic}
-                        variant="top"
-                      />
-                    </div>
-                  </Navbar.Text>
-                  <NavDropdown title="Amr Tarek" id="collasible-nav-dropdown">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar> */}
           <Navbar
             key={"md"}
             expand={"md"}
@@ -259,7 +181,13 @@ const App = () => {
               <Search />
             </div>
             <div className="mb-4 mb-md-5 ">
-              <EmpCards />
+              {filteredEmployee.length !== 0 ? (
+                <EmpCards />
+              ) : (
+                <div className="m-auto d-flex justify-content-center">
+                  Nothing Here, yet!
+                </div>
+              )}
             </div>
           </div>
         </Content>

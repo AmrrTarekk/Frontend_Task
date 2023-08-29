@@ -76,7 +76,6 @@ function EmpForm() {
 
   useEffect(() => {
     const result = PHONE_REGEX.test(phone);
-    console.log(phone.length);
     if (phone.length < 11 || !result) {
       setValidPhone(false);
     } else {
@@ -95,8 +94,6 @@ function EmpForm() {
   }, [empEmail]);
 
   const handleSubmit = () => {
-    console.log(validEmail, "e");
-
     if (
       empName === "" ||
       phone === "" ||
@@ -106,7 +103,6 @@ function EmpForm() {
       selectedDate === null
     ) {
       setErr(true);
-      console.log(err);
 
       toast.error("Fill The Required Fields Before Saving.");
       return;
@@ -166,7 +162,6 @@ function EmpForm() {
       selectedDate === null
     ) {
       setErr(false);
-      console.log("erro");
     }
   }, [empName, phone, empEmail, department, position, selectedDate]);
 

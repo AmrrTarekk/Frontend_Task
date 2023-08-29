@@ -129,7 +129,6 @@
   position: relative !important;
 }
 
-
 .ant-menu-item:nth-child(4):before {
   content: "5";
   position: absolute;
@@ -155,7 +154,12 @@
   top: 54px !important;
 }
 
-@media (max-width: 510px) {
+@media only screen and (min-width: 375px) and (orientation: landscape) {
+  .Rectangle-898 .ant-menu {
+    margin-top: 0 !important;
+  }
+}
+@media (max-width: 668px) {
   .ant-menu-item .ant-menu-item-icon {
     font-size: 1.3rem !important;
     padding-left: 10px !important;

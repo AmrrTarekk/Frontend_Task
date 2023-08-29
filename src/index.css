@@ -18,6 +18,13 @@
     url("./fonts/Lato-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Segoe UI";
+  src: local("Segoe UI"),
+    local("Segoe UI"),
+    url("./fonts/Segoe UI.ttf") format("truetype");
+}
+
 * {
   /* font-size: 16px; */
 }

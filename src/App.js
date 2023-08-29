@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Layout, Menu, theme } from "antd";
 import Search from "./components/Search/Search";
 import EmpCards from "./components/Cards/EmpCards";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import {
   faBell,
   faChevronDown,
@@ -15,6 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import profilePic from "./profile.jpg";
 import { Toaster } from "react-hot-toast";
+import { Offcanvas } from "react-bootstrap";
 
 const today = new Date();
 function formatDate(date) {
@@ -109,8 +114,9 @@ const App = () => {
             padding: 0,
             background: colorBgContainer,
           }}
+          className="d-flex justify-content-end"
         >
-          <div className="header">
+          {/* <div className="header">
             <div>
               {day}, {formatDate(today)} {getTime(today)}
             </div>
@@ -141,7 +147,111 @@ const App = () => {
             <div className="dropIcon pb-2">
               <FontAwesomeIcon icon={faChevronDown} />
             </div>
-          </div>
+          </div> */}
+
+          {/* <Navbar
+            collapseOnSelect
+            expand="lg"
+            className="bg-body-tertiary h-100 navbg"
+          >
+            <Container className="">
+              <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav " />
+              <Navbar.Collapse id="responsive-navbar-nav ">
+                <Nav className="me-auto ">
+                  <Navbar.Text>
+                    {day}, {formatDate(today)} {getTime(today)}
+                  </Navbar.Text>
+                  <Nav.Link>
+                    <Button type="primary" className="signInBtn">
+                      Sign In
+                    </Button>
+                  </Nav.Link>
+                  <Navbar.Text className="d-flex align-items-center gap-2 flex-wrap mx-2">
+                    <div className="Line-4"></div>
+                    <div className="d-flex position-relative ">
+                      <FontAwesomeIcon className="fs-5" icon={faBell} />
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger bg-notif ">
+                        1
+                      </span>
+                    </div>
+                    <div className="Line-4"></div>
+                  </Navbar.Text>
+                  <Navbar.Text className="mr-2">
+                    <div className="imageDiv">
+                      <img
+                        alt="profilePic"
+                        className=""
+                        src={profilePic}
+                        variant="top"
+                      />
+                    </div>
+                  </Navbar.Text>
+                  <NavDropdown title="Amr Tarek" id="collasible-nav-dropdown">
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar> */}
+          <Navbar
+            key={"md"}
+            expand={"md"}
+            className="bg-body-tertiary mb-3 h-100 flex-nowrap navbg"
+          >
+            <Container fluid>
+              <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
+              <Navbar.Offcanvas
+                id={`offcanvasNavbar-expand-md`}
+                aria-labelledby={`offcanvasNavbarLabel-expand-md`}
+                placement="end"
+              >
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title
+                    id={`offcanvasNavbarLabel-expand-md`}
+                  ></Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <Nav className="justify-content-end flex-grow-1 pe-3 align-items-center">
+                    <Navbar.Text>
+                      {day}, {formatDate(today)} {getTime(today)}
+                    </Navbar.Text>
+                    <Nav.Link>
+                      <Button type="primary" className="signInBtn">
+                        Sign In
+                      </Button>
+                    </Nav.Link>
+                    <Navbar.Text className="d-flex align-items-center gap-2 flex-wrap mx-2">
+                      <div className="Line-4"></div>
+                      <div className="d-flex position-relative ">
+                        <FontAwesomeIcon className="fs-5" icon={faBell} />
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger bg-notif ">
+                          1
+                        </span>
+                      </div>
+                      <div className="Line-4"></div>
+                    </Navbar.Text>
+                    <Navbar.Text className="mr-2 mt-0 d-flex flew-wrap align-items-center gap-2 gap-md-1">
+                      <div className="imageDiv">
+                        <img
+                          alt="profilePic"
+                          className=""
+                          src={profilePic}
+                          variant="top"
+                        />
+                      </div>
+                      <NavDropdown
+                        title="Amr Tarek"
+                        id="collasible-nav-dropdown"
+                      >
+                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                      </NavDropdown>
+                    </Navbar.Text>
+                  </Nav>
+                </Offcanvas.Body>
+              </Navbar.Offcanvas>
+            </Container>
+          </Navbar>
         </Header>
         <Content style={{ backgroundColor: "#fff", height: "90vh" }}>
           <div className="wrapper">

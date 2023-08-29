@@ -48,7 +48,7 @@ const items = [
   getItem("Workplace", "2", <FontAwesomeIcon icon={faDisplay} />),
   getItem("Holidays", "3", <FontAwesomeIcon icon={faMugSaucer} />),
   getItem("Employees", "4", <FontAwesomeIcon icon={faUserGroup} />),
-  getItem("Inbound Requests", "5", <FontAwesomeIcon icon={faHandsHolding} />),
+  getItem("Requests", "5", <FontAwesomeIcon icon={faHandsHolding} />),
 ];
 
 const App = () => {
@@ -124,7 +124,12 @@ const App = () => {
             <div class="Line-4"></div>
             <div className="profileCont d-flex flex-row justify-content-center flex-nowrap gap-1">
               <div className="imageDiv">
-                <img className="" src={profilePic} variant="top" />
+                <img
+                  alt="profilePic"
+                  className=""
+                  src={profilePic}
+                  variant="top"
+                />
               </div>
               <p>Amr Tarek</p>
               <span className="dropIcon">
@@ -138,10 +143,10 @@ const App = () => {
         </Header>
         <Content style={{ backgroundColor: "#fff", height: "90vh" }}>
           <div className="wrapper">
-            <div className="mb-5">
+            <div className="mb-4 mb-md-5 ">
               <Search />
             </div>
-            <div className="mb-5 ">
+            <div className="mb-4 mb-md-5 ">
               <EmpCards />
             </div>
           </div>

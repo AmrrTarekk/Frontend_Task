@@ -7,6 +7,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 .header {
   display: flex;
   flex-direction: row;
@@ -16,6 +17,7 @@
   gap: 10px;
   margin-right: 1rem;
 }
+
 .signInBtn {
   display: flex !important;
   width: 94px !important;
@@ -24,16 +26,19 @@
   align-items: center !important;
   background-color: #27b40c !important;
 }
+
 .bellIcon {
   color: #8997a4 !important;
   cursor: pointer;
 }
+
 .Line-4 {
   width: 0;
   height: 30px;
   margin: 0;
   border: solid 0.5px #e8e4e440;
 }
+
 /* .imageDiv {
   color: #8997a4;
 } */
@@ -42,15 +47,18 @@
   height: 63px;
   color: #8997a4;
 }
+
 .imageDiv img {
   object-fit: cover;
   border-radius: 50% !important;
   width: 35px;
   height: 35px;
 }
+
 .dropIcon {
   cursor: pointer;
 }
+
 .wrapper {
   background-color: #f5f5f5;
   width: 98%;
@@ -58,6 +66,7 @@
   padding: 36px;
   border-top-right-radius: 2px;
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 90vh;
@@ -81,15 +90,18 @@
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16) !important;
   background-image: linear-gradient(to bottom, #39a4dc, #2763ab) !important;
 }
+
 .Rectangle-898 .ant-menu {
   background: transparent !important;
   margin-top: 3rem !important;
 }
+
 .ant-menu-item-selected {
   background-color: #2765ac !important;
   border-left: solid 4px #59c203;
   border-radius: 0 !important;
 }
+
 .ant-menu-item {
   margin: 0 !important;
   padding: 0 !important;
@@ -102,15 +114,52 @@
   padding-top: 15px !important;
   color: #fff !important;
 }
+
 .ant-menu-item .ant-menu-item-icon {
   font-size: 1.9rem !important;
   padding-left: 10px !important;
+  position: relative !important;
 }
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+.ant-menu-item:nth-child(4):before {
+  content: "5";
+  position: absolute;
+  top: 6px;
+  left: 59px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  width: 10px;
+  height: 10px;
+  font-size: 12px;
+  background-color: red;
+  z-index: 999;
+}
+
+@media (max-width: 510px) {
+  .ant-menu-item .ant-menu-item-icon {
+    font-size: 1.3rem !important;
+    padding-left: 10px !important;
   }
-  to {
-    transform: rotate(360deg);
+
+  .Rectangle-898 {
+    width: 80px !important;
+    min-width: 60px !important;
+  }
+
+  .ant-layout.site-layout {
+    margin-left: 79px !important;
+  }
+
+  .wrapper {
+    padding: 10px;
+  }
+
+  .ant-menu-item:nth-child(4):before {
+    top: 10px;
+    left: 43px;
+    padding: 6px;
   }
 }

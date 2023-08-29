@@ -13,7 +13,10 @@ export const EmpProvider = ({ children }) => {
     department,
     position,
     selectedImage,
-    date
+    date,
+    office,
+    attendance,
+    role
   ) => {
     setEmployees((employees) => [
       ...employees,
@@ -25,9 +28,10 @@ export const EmpProvider = ({ children }) => {
         position,
         selectedImage: selectedImage,
         id: crypto.randomUUID(),
-        year: date[0],
-        month: date[1],
-        day: date[2],
+        date,
+        office,
+        attendance,
+        role,
       },
     ]);
   };

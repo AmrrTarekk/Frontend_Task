@@ -15,13 +15,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Info from "../Info/Info";
 
-const text = <span>prompt text</span>;
-const buttonWidth = 70;
-
 function EmpCards() {
   const { filteredEmployee, employees, setEmployees } = useEmp();
 
   console.log("Fe eh filter", filteredEmployee);
+
   const handleDelete = (id) => {
     console.log(employees, id);
     setEmployees(() => {
@@ -29,17 +27,38 @@ function EmpCards() {
     });
   };
   return (
-    <div className="d-flex flex-wrap gap-3">
+    <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
       {filteredEmployee.map((emp) => (
         <Card className="Path-120" style={{ width: "24rem" }} key={emp.id}>
           <div className="HR---Employees3 d-flex  ">
             <div>
-              {emp.selectedImage && (
+              {emp.selectedImage ? (
                 <div className=" d-flex flex-column justify-content-center align-items-center  mt-3 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
                   <img
+                    alt="cardImage"
                     className=""
                     variant="top"
                     src={URL.createObjectURL(emp.selectedImage)}
+                  />
+                  <div className="icons d-flex gap-3 mt-1">
+                    <span>
+                      <FontAwesomeIcon icon={faPen} />
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faCirclePause} />
+                    </span>
+                    <span onClick={() => handleDelete(emp.id)}>
+                      <FontAwesomeIcon icon={faTrashCan} />
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div className=" d-flex flex-column justify-content-center align-items-center  mt-3 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
+                  <img
+                    alt="cardImage"
+                    className=""
+                    variant="top"
+                    src={profileImage}
                   />
                   <div className="icons d-flex gap-3 mt-1">
                     <span>
@@ -70,21 +89,31 @@ function EmpCards() {
                 </div>
 
                 <div className="contacts d-flex flex-row gap-2">
-                  <div className="info-icons">
-                    <Tooltip placement="bottom" title={emp.email}>
+                  <Tooltip placement="bottom" title={emp.email}>
+                    <div className="info-icons">
                       <FontAwesomeIcon icon={faEnvelope} />
-                    </Tooltip>
-                  </div>
-                  <div className="info-icons">
-                    <Tooltip placement="bottom" title={emp.phone}>
+                    </div>
+                  </Tooltip>
+                  <Tooltip placement="bottom" title={emp.phone}>
+                    <div className="info-icons">
                       <FontAwesomeIcon className="rotate-135" icon={faPhone} />
-                    </Tooltip>
-                  </div>
-                  <div className="info-icons info">
-                    <Tooltip placement="bottom" title={<Info />}>
+                    </div>
+                  </Tooltip>
+                  <Tooltip
+                    className="info"
+                    placement="bottom"
+                    title={
+                      <Info
+                        office={emp.office}
+                        role={emp.role}
+                        date={emp.date}
+                      />
+                    }
+                  >
+                    <div className="info-icons info">
                       <FontAwesomeIcon icon={faExclamation} />
-                    </Tooltip>
-                  </div>
+                    </div>
+                  </Tooltip>
                 </div>
               </div>
             </div>

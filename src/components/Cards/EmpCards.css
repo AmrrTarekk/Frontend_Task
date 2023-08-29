@@ -19,12 +19,14 @@
   height: 64px;
   margin: 0 15px 1px 0.1px;
 }
+
 .Profile-Picture-Pauline-Suy-circle-ScripturaEngage img {
   object-fit: cover;
   border-radius: 50% !important;
   width: 64px;
   height: 64px;
 }
+
 .Line-200 {
   width: 0;
   height: 79px;
@@ -32,32 +34,34 @@
   opacity: 0.22;
   border: solid 0.5px #8997a4;
 }
+
 .icons {
   color: #8997a4;
   font-size: 0.6rem;
 }
+
 .icons span {
   cursor: pointer;
 }
+
 .sara-khaled-ahmed {
   width: 188px;
   height: 24px;
   margin: 1px 1px 3px 23.5px;
-  font-size: 20px;
-  font-family: Roboto-Regular;
-  font-weight: 500;
-  font-stretch: normal;
-  line-height: 1.2;
+  font-size: 1.2rem;
+  font-family: Lato-Regular;
+  font-weight: 800;
   letter-spacing: 1.1px;
   text-align: left;
   color: #313030;
   white-space: nowrap;
 }
+
 .HR-Head {
   width: fit-content;
   height: 15px;
   margin: 1px 1px 0px 23.5px;
-  font-family: Roboto;
+  font-family: Roboto Regular;
   font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
@@ -67,11 +71,12 @@
   text-align: left;
   color: #313030;
 }
+
 .business-development {
   width: fit-content;
   height: 13px;
   margin: 1px 1px 5px 23.5px;
-  font-family: Roboto;
+  font-family: Roboto Regular;
   font-size: 10px;
   font-weight: normal;
   font-stretch: normal;
@@ -81,6 +86,7 @@
   text-align: left;
   color: #5c6974;
 }
+
 .Rectangle-1520 {
   width: 57px;
   height: 17px;
@@ -90,11 +96,12 @@
   color: #27b40c;
   background-color: #dcf3d7;
 }
+
 .present {
   display: block;
   width: 41px;
   height: 13px;
-  font-family: Lato;
+  font-family: Latoc;
   font-size: 11px;
   font-weight: 500;
   font-stretch: normal;
@@ -103,9 +110,11 @@
   letter-spacing: 0.61px;
   text-align: left;
 }
+
 .rotate-135 {
   transform: rotate(135deg) !important;
 }
+
 .info-icons {
   background-color: #eaeef0;
   border-radius: 50%;
@@ -117,6 +126,7 @@
   align-items: center;
   cursor: pointer;
 }
+
 .info {
   font-size: 13px;
 }
@@ -130,8 +140,27 @@
 :where(.css-dev-only-do-not-override-17a39f8).ant-tooltip {
   --antd-arrow-background-color: white;
 }
+
+.ant-tooltip {
+  max-width: 280px !important;
+}
+
+@media (max-width: 510px) {
+  .Path-120 {
+    padding: 10px 6px 5.8px 8.9px !important;
+  }
+
+  .sara-khaled-ahmed {
+    font-size: 1rem !important;
+  }
+
+
+}
+
 @media (min-width: 768px) {
   .w-md-100 {
     width: 100% !important;
   }
+
+
 }

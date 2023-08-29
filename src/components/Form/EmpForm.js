@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Modal,
-  Form,
-  Input,
-  Select,
-  DatePicker,
-  Space,
-  Checkbox,
-} from "antd";
+import { Button, Modal, Form, Input, Select, DatePicker, Space } from "antd";
 import "./EmpForm.css";
 import useEmp from "../../hooks/useEmp";
 import { useDropzone } from "react-dropzone";
@@ -18,6 +9,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const PHONE_REGEX = /^01[0125][0-9]{8}$/;
 
 function EmpForm() {
   const [open, setOpen] = useState(false);
@@ -25,12 +17,17 @@ function EmpForm() {
 
   const [empName, setEmpName] = useState("");
   const [phone, setPhone] = useState();
+
   const [empEmail, setEmpEmail] = useState("");
-  const [department, setDepartment] = useState("Select");
-  const [office, setOffice] = useState("Select");
-  const [attendance, setAttendance] = useState("Select");
-  const [role, setRole] = useState("Select");
-  const [position, setPosition] = useState("Select");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+
+  const [department, setDepartment] = useState("");
+  const [office, setOffice] = useState("");
+  const [attendance, setAttendance] = useState("");
+  const [role, setRole] = useState("");
+  const [position, setPosition] = useState("");
+  const [check, setCheck] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -49,8 +46,11 @@ function EmpForm() {
   };
 
   const handleDrop = (acceptedFiles) => {
-    console.log(acceptedFiles[0]);
     setSelectedImage(acceptedFiles[0]);
+  };
+
+  const handleCheck = () => {
+    setCheck(!check);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -58,17 +58,16 @@ function EmpForm() {
   });
 
   const handleSubmit = () => {
-    console.log("first");
     if (
       empName === "" ||
       phone === "" ||
       empEmail === "" ||
       department === "" ||
       position === "" ||
-      selectedDate === null ||
-      selectedImage === null
+      selectedDate === null
     ) {
       setErr(true);
+      console.log(err);
       return;
     }
     handleAddEmployee(
@@ -78,16 +77,10 @@ function EmpForm() {
       department,
       position,
       selectedImage,
-      dateContext.split("-")
-    );
-    console.log(
-      empName,
-      empEmail,
-      phone,
-      department,
-      position,
-      selectedImage,
-      dateContext.split("-")
+      dateContext.split("-"),
+      office,
+      attendance,
+      role
     );
     setEmpEmail("");
     setEmpName("");
@@ -96,7 +89,12 @@ function EmpForm() {
     setPosition("");
     setSelectedDate(null);
     setSelectedImage(null);
+    setOffice("");
+    setAttendance("");
+    setRole("");
     setOpen(false);
+    setCheck(false);
+    form.resetFields();
   };
 
   useEffect(() => {
@@ -106,20 +104,12 @@ function EmpForm() {
       empEmail === "" ||
       department === "" ||
       position === "" ||
-      selectedDate === null ||
-      selectedImage === null
+      selectedDate === null
     ) {
       setErr(false);
+      console.log("erro");
     }
-  }, [
-    empName,
-    phone,
-    empEmail,
-    department,
-    position,
-    selectedDate,
-    selectedImage,
-  ]);
+  }, [empName, phone, empEmail, department, position, selectedDate]);
 
   return (
     <div>
@@ -158,10 +148,10 @@ function EmpForm() {
             {/* Image Uploader */}
             <div className="col-4 ">
               {selectedImage && (
-                <div className="text-center w-100 d-flex flex-column gap-2 justify-content-center align-items-center ">
+                <div className="text-center w-100 d-flex flex-column gap-2 justify-content-around h-100  align-items-center ">
                   <img
-                    alt="not found"
-                    width={"70%"}
+                    alt="cardPic"
+                    className="cardPic"
                     src={URL.createObjectURL(selectedImage)}
                   />
                   <Button
@@ -189,7 +179,7 @@ function EmpForm() {
                 </Form.Item>
               )}
             </div>
-            <div className="col-4 ml-0">
+            <div className="col-sm-4 col-8 ml-0">
               {/*  Name */}
               <Form.Item
                 label="Name"
@@ -221,7 +211,7 @@ function EmpForm() {
                 />
               </Form.Item>
             </div>
-            <div className="col-4">
+            <div className="col-sm-4 col-12">
               {/* Start Date */}
               <Form.Item
                 label="Start Date"
@@ -263,7 +253,19 @@ function EmpForm() {
             {/*  Office */}
             <div className="col-12">
               <Form.Item label="Office">
-                <Select value={office} onChange={(e) => setOffice(e)}>
+                <Select
+                  value={office === "" ? null : office}
+                  placeholder="Select"
+                  onChange={(e) => setOffice(e)}
+                >
+                  {/* <Select.Option
+                    value=""
+                    className="selectedOp"
+                    disabled
+                    selected
+                  >
+                    Select
+                  </Select.Option> */}
                   <Select.Option value="Arabic Localizer">
                     Arabic Localizer
                   </Select.Option>
@@ -271,7 +273,7 @@ function EmpForm() {
               </Form.Item>
             </div>
             {/*  Department */}
-            <div className="col-6">
+            <div className="col-sm-6 col-12">
               <Form.Item
                 required
                 tooltip={{
@@ -280,7 +282,11 @@ function EmpForm() {
                 }}
                 label="Department"
               >
-                <Select value={department} onChange={(e) => setDepartment(e)}>
+                <Select
+                  value={department === "" ? null : department}
+                  placeholder="Select"
+                  onChange={(e) => setDepartment(e)}
+                >
                   <Select.Option value="Backend Team">
                     Backend Team
                   </Select.Option>
@@ -294,23 +300,31 @@ function EmpForm() {
               </Form.Item>
             </div>
             {/*  Attendance Profile */}
-            <div className="col-6">
+            <div className="col-sm-6 col-12">
               <Form.Item label="Attendance Profile">
-                <Select value={attendance} onChange={(e) => setAttendance(e)}>
+                <Select
+                  value={attendance === "" ? null : attendance}
+                  placeholder="Select"
+                  onChange={(e) => setAttendance(e)}
+                >
                   <Select.Option value="none">none</Select.Option>
                 </Select>
               </Form.Item>
             </div>
             {/*  Role */}
-            <div className="col-6">
+            <div className="col-sm-6 col-12">
               <Form.Item label="Role">
-                <Select value={role} onChange={(e) => setRole(e)}>
+                <Select
+                  value={role === "" ? null : role}
+                  placeholder="Select"
+                  onChange={(e) => setRole(e)}
+                >
                   <Select.Option value="Employee">Employee</Select.Option>
                 </Select>
               </Form.Item>
             </div>
             {/* Position */}
-            <div className="col-6">
+            <div className="col-sm-6 col-12">
               <Form.Item
                 required
                 tooltip={{
@@ -319,7 +333,11 @@ function EmpForm() {
                 }}
                 label="Position"
               >
-                <Select value={position} onChange={(e) => setPosition(e)}>
+                <Select
+                  value={position === "" ? null : position}
+                  placeholder="Select"
+                  onChange={(e) => setPosition(e)}
+                >
                   <Select.Option value="Backend Developer">
                     Backend Developer
                   </Select.Option>
@@ -338,7 +356,13 @@ function EmpForm() {
             </h5>
             <div className="col-12 mt-2 ">
               <div className="d-flex align-items-center gap-2">
-                <input type="checkbox" id="WFH" name="WFH" />
+                <input
+                  type="checkbox"
+                  checked={check}
+                  onChange={handleCheck}
+                  id="WFH"
+                  name="WFH"
+                />
                 <label htmlFor="WFH">
                   <b>Allow Employee To Work From Home</b>
                 </label>

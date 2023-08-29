@@ -1,0 +1,29 @@
+.infoCard {
+    width: 300px;
+}
+
+.infoCard p {
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: #8997a4;
+    height: 40px;
+
+}
+
+.infoCard p span {
+    font-size: 0.7rem;
+    color: #000;
+}
+
+@media (max-width: 520px) {
+    .infoCard p {
+        font-size: 0.7rem;
+    }
+
+    .infoCard p span {
+        font-size: 0.7rem;
+    }
+}

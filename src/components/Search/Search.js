@@ -13,9 +13,9 @@ function Search() {
     setQuery(e.target.value);
   };
   return (
-    <div className="d-flex justify-content-between gap-2">
+    <div className="d-flex justify-content-between gap-3">
       <Input
-        className="rounded-2"
+        className="rounded-2 searchInput"
         type="text"
         placeholder="Search"
         value={query}

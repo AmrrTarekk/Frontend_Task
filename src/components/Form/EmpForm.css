@@ -134,6 +134,21 @@ input[type="checkbox"] {
   white-space: nowrap !important;
 }
 
+.invalidInput {
+  border-color: rgb(255, 14, 14) !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 @media (max-width: 520px) {
   .cardPic {
     width: 70%;

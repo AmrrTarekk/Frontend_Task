@@ -14,6 +14,7 @@ import {
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import profilePic from "./profile.jpg";
+import { Toaster } from "react-hot-toast";
 
 const today = new Date();
 function formatDate(date) {
@@ -77,6 +78,7 @@ const App = () => {
   } = theme.useToken();
   return (
     <Layout hasSider>
+      <Toaster position="top-center" reverseOrder={false} />
       <Sider
         className="Rectangle-898"
         style={{
@@ -117,11 +119,11 @@ const App = () => {
                 Sign In
               </Button>
             </div>
-            <div class="Line-4"></div>
+            <div className="Line-4"></div>
             <div className="bellIcon">
               <FontAwesomeIcon icon={faBell} />
             </div>
-            <div class="Line-4"></div>
+            <div className="Line-4"></div>
             <div className="profileCont d-flex flex-row justify-content-center flex-nowrap gap-1">
               <div className="imageDiv">
                 <img

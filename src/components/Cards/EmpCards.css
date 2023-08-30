@@ -45,7 +45,7 @@
 }
 
 .sara-khaled-ahmed {
-  width: 188px;
+  width: 216px;
   height: 24px;
   margin: 1px 1px 3px 23.5px;
   font-size: 1.2rem;
@@ -56,7 +56,7 @@
   color: #313030;
   white-space: nowrap;
   display: inline-block;
-  max-width: 188px;
+  max-width: 217px;
   margin-bottom: 0;
   padding-bottom: 0;
   white-space: nowrap;
@@ -154,7 +154,7 @@
   max-width: 280px !important;
 }
 
-@media (max-width: 525px) {
+@media (max-width: 450px) {
   .Path-120 {
     padding: 10px 6px 5.8px 8.9px !important;
   }
@@ -162,7 +162,7 @@
   .sara-khaled-ahmed {
     font-size: 1rem !important;
     display: inline-block;
-    max-width: 140px;
+    max-width: 165px;
     margin-bottom: 0;
     padding-bottom: 0;
     white-space: nowrap;
@@ -170,16 +170,32 @@
     text-overflow: ellipsis;
   }
 
+  .HR---Employees3 .card-info {
+    margin-left: -0.85rem;
+  }
+
+  .HR---Employees3 .present-icons {
+    gap: 25px !important;
+    justify-content: start !important;
+  }
 
 }
 
-@media (max-width: 750px) {
+@media only screen and (min-width: 650px) and (max-width: 750px) {
 
   .ant-tooltip-placement-topLeft .ant-tooltip-inner {
     max-width: 147px !important;
     text-align: center !important;
   }
 
+  .HR---Employees3 .card-info {
+    margin-left: -12px;
+  }
+
+  .sara-khaled-ahmed {
+    width: 264px;
+    max-width: 260px;
+  }
 }
 
 @media (min-width: 768px) {

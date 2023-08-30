@@ -72,7 +72,7 @@ function EmpCards() {
               )}
             </div>
             <div className="Line-200"></div>
-            <div className="d-flex flex-column w-100">
+            <div className="card-info d-flex flex-column w-100">
               <h5 className="mb-0 mb-sm-1">
                 <span className="sara-khaled-ahmed ">
                   <Tooltip placement="topLeft" title={emp.name}>
@@ -84,7 +84,7 @@ function EmpCards() {
                 <span className="HR-Head">{emp.position}</span>
                 <span className="business-development">{emp.department}</span>
               </div>
-              <div className="d-flex justify-content-between">
+              <div className="present-icons d-flex justify-content-between">
                 <div className="Rectangle-1520">
                   <span className="present">present</span>
                 </div>

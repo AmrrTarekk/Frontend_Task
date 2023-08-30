@@ -55,6 +55,13 @@
   text-align: left;
   color: #313030;
   white-space: nowrap;
+  display: inline-block;
+  max-width: 188px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .HR-Head {
@@ -163,6 +170,15 @@
     text-overflow: ellipsis;
   }
 
+
+}
+
+@media (max-width: 750px) {
+
+  .ant-tooltip-placement-topLeft .ant-tooltip-inner {
+    max-width: 147px !important;
+    text-align: center !important;
+  }
 
 }
 

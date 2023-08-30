@@ -74,7 +74,11 @@ function EmpCards() {
             <div className="Line-200"></div>
             <div className="d-flex flex-column w-100">
               <h5 className="mb-0 mb-sm-1">
-                <span className="sara-khaled-ahmed ">{emp.name}</span>
+                <span className="sara-khaled-ahmed ">
+                  <Tooltip placement="topLeft" title={emp.name}>
+                    {emp.name}
+                  </Tooltip>
+                </span>
               </h5>
               <div className="d-flex flex-column mb-0">
                 <span className="HR-Head">{emp.position}</span>

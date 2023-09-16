@@ -19,6 +19,11 @@ export const EmpProvider = ({ children }) => {
     attendanceProfile,
     role,
   }) => {
+    const nameArr = name.toLowerCase().split(" ");
+    for (var i = 0; i < nameArr.length; i++) {
+      nameArr[i] = nameArr[i].charAt(0).toUpperCase() + nameArr[i].slice(1);
+    }
+    name = nameArr.join(" ");
     setEmployees((employees) => [
       ...employees,
       {

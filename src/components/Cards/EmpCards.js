@@ -85,7 +85,7 @@ function EmpCards() {
                 </div>
                 <div className="present-icons d-flex justify-content-between">
                   <div className="Rectangle-1520">
-                    <span className="present">present</span>
+                    <span className="present">Present</span>
                   </div>
 
                   <div className="contacts d-flex flex-row gap-2">

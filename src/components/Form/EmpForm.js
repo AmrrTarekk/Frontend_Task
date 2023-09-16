@@ -26,10 +26,23 @@ const initialFormValues = {
   position: "",
   WFH: false,
 };
+const initialFormFlags = {
+  nameFocus: false,
+  phoneFocus: false,
+  emailFocus: false,
+};
+const initialFormValidation = {
+  nameValid: false,
+  phoneValid: false,
+  emailValid: false,
+};
 function EmpForm() {
   const [open, setOpen] = useState(false);
   const { handleAddEmployee } = useEmp();
   const [formEmployee, setFormEmployee] = useState(initialFormValues);
+  const [formEmployeeFlags, setFormEmployeeFlags] = useState(initialFormFlags);
+  const [formEmployeeValidation, setFormEmployeeValidation] =
+    useState(initialFormFlags);
   const {
     image,
     name,
@@ -43,6 +56,8 @@ function EmpForm() {
     position,
     WFH,
   } = formEmployee;
+  const { nameFocus, phoneFocus, emailFocus } = formEmployeeFlags;
+  const { nameValid, phoneValid, emailValid } = formEmployeeValidation;
 
   // handle image drag&drop
   const handleDrop = (acceptedFiles) => {
@@ -70,14 +85,14 @@ function EmpForm() {
       WFH: !prev?.WFH,
     }));
   };
-  const [validName, setValidName] = useState(false);
-  const [nameFocus, setNameFocus] = useState(false);
+  // const [validName, setValidName] = useState(false);
+  // const [nameFocus, setNameFocus] = useState(false);
 
-  const [validPhone, setValidPhone] = useState(false);
-  const [phoneFocus, setPhoneFocus] = useState(false);
+  // const [validPhone, setValidPhone] = useState(false);
+  // const [phoneFocus, setPhoneFocus] = useState(false);
 
-  const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
+  // const [validEmail, setValidEmail] = useState(false);
+  // const [emailFocus, setEmailFocus] = useState(false);
 
   const [err, setErr] = useState(false);
 
@@ -86,26 +101,19 @@ function EmpForm() {
   const onRequiredTypeChange = ({ requiredMarkValue }) => {
     setRequiredMarkType(requiredMarkValue);
   };
-
-  // useEffect(() => {
-  //   const result = NAME_REGEX.test(empName);
-  //   setValidName(result);
-  // }, [empName]);
-
-  // useEffect(() => {
-  //   const result = PHONE_REGEX.test(phone);
-  //   if (phone.length < 11 || !result) {
-  //     setValidPhone(false);
-  //   } else {
-  //     setValidPhone(true);
-  //   }
-  // }, [phone]);
-
-  // useEffect(() => {
-  //   const result = EMAIL_REGEX.test(empEmail);
-  //   setValidEmail(result);
-  // }, [empEmail]);
-
+  const handleFormChange = (e, selectedName) => {
+    if (selectedName) {
+      setFormEmployee((prev) => ({
+        ...prev,
+        [selectedName]: e,
+      }));
+    } else {
+      setFormEmployee((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    }
+  };
   const handleSubmit = ({ values }) => {
     console.log(values);
     if (department === "" || position === "" || selectedDate === null) {
@@ -134,6 +142,52 @@ function EmpForm() {
     setOpen(false);
     form.resetFields();
   };
+  const handleCancel = () => {
+    setOpen(false);
+    setFormEmployee(initialFormValues);
+    setSelectedDate(null);
+    setOpen(false);
+    form.resetFields();
+  };
+  const handleFormFlags = (e) => {
+    // console.log(e);
+    switch (e.type) {
+      case "focus":
+        console.log("focus");
+        setFormEmployeeFlags((prev) => ({
+          ...prev,
+          [`${e.target.name}Focus`]: true,
+        }));
+        break;
+      case "blur":
+        setFormEmployeeFlags((prev) => ({
+          ...prev,
+          [`${e.target.name}Focus`]: false,
+        }));
+        break;
+      default:
+        break;
+
+        // switch (e.target.name) {
+        //   case "name":
+        //     console.log("name");
+        //     break;
+        //   case "email":
+        //     console.log("email");
+        //     break;
+        //   case "phone":
+        //     break;
+        //   default:
+        //     break;
+        // }
+        console.log("blur");
+    }
+    // console.log(`${e.target.name}Valid`);
+    // setFormEmployeeValidation((prev) => ({
+    //   ...prev,
+    //   [`${e.target.name}Valid`]: e.target.value,
+    // }));
+  };
 
   useEffect(() => {
     if (
@@ -148,31 +202,29 @@ function EmpForm() {
     }
   }, [formEmployee, selectedDate]);
 
-  const handleCancel = () => {
-    setOpen(false);
-    setFormEmployee(initialFormValues);
-    setSelectedDate(null);
-    setOpen(false);
-    form.resetFields();
-  };
-  // new changes
-  const handleFormChange = (e, selectedName) => {
-    if (selectedName) {
-      setFormEmployee((prev) => ({
-        ...prev,
-        [selectedName]: e,
-      }));
-    } else {
-      setFormEmployee((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value,
-      }));
-    }
-  };
+  // useEffect(() => {
+  //   const result = NAME_REGEX.test(empName);
+  //   setValidName(result);
+  // }, [empName]);
+
+  // useEffect(() => {
+  //   const result = PHONE_REGEX.test(phone);
+  //   if (phone.length < 11 || !result) {
+  //     setValidPhone(false);
+  //   } else {
+  //     setValidPhone(true);
+  //   }
+  // }, [phone]);
+
+  // useEffect(() => {
+  //   const result = EMAIL_REGEX.test(empEmail);
+  //   setValidEmail(result);
+  // }, [empEmail]);
+
   // will delete
   useEffect(() => {
-    console.log(formEmployee);
-  }, [formEmployee]);
+    console.log(formEmployeeFlags);
+  }, [formEmployee, formEmployeeFlags]);
   return (
     <div>
       <Button
@@ -252,12 +304,12 @@ function EmpForm() {
                 }}
               >
                 <Input
-                  className={nameFocus && !validName ? "invalidInput" : ""}
+                  className={nameFocus && !nameValid ? "invalidInput" : ""}
                   name="name"
                   value={name}
                   onChange={handleFormChange}
-                  onFocus={() => setNameFocus(true)}
-                  onBlur={() => setNameFocus(false)}
+                  onFocus={handleFormFlags}
+                  onBlur={handleFormFlags}
                   placeholder="Enter you full name"
                 />
               </Form.Item>
@@ -274,10 +326,10 @@ function EmpForm() {
                   type="number"
                   name="phone"
                   value={phone}
-                  className={phoneFocus && !validPhone ? "invalidInput" : ""}
+                  className={phoneFocus && !phoneValid ? "invalidInput" : ""}
                   onChange={handleFormChange}
-                  onFocus={() => setPhoneFocus(true)}
-                  onBlur={() => setPhoneFocus(false)}
+                  onFocus={handleFormFlags}
+                  onBlur={handleFormFlags}
                   placeholder="01.."
                 />
               </Form.Item>
@@ -315,9 +367,9 @@ function EmpForm() {
                   name="email"
                   value={email}
                   onChange={handleFormChange}
-                  className={emailFocus && !validEmail ? "invalidInput" : ""}
-                  onFocus={() => setEmailFocus(true)}
-                  onBlur={() => setEmailFocus(false)}
+                  className={emailFocus && !emailValid ? "invalidInput" : ""}
+                  onFocus={handleFormFlags}
+                  onBlur={handleFormFlags}
                   placeholder="Enter you email"
                 />
               </Form.Item>

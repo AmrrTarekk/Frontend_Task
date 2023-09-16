@@ -7,31 +7,31 @@ export const EmpProvider = ({ children }) => {
   const [filteredEmployee, setFilteredEmployee] = useState([]);
   const [query, setQuery] = useState("");
 
-  const handleAddEmployee = (
-    empName,
-    empPhone,
-    empEmail,
+  const handleAddEmployee = ({
+    name,
+    phone,
+    email,
     department,
     position,
     selectedImage,
     date,
     office,
-    attendance,
-    role
-  ) => {
+    attendanceProfile,
+    role,
+  }) => {
     setEmployees((employees) => [
       ...employees,
       {
-        name: empName,
-        phone: empPhone,
-        email: empEmail,
+        name,
+        phone,
+        email,
         department,
         position,
         selectedImage: selectedImage,
         id: crypto.randomUUID(),
         date,
         office,
-        attendance,
+        attendanceProfile,
         role,
       },
     ]);

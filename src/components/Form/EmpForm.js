@@ -8,11 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-hot-toast";
 
-// const NAME_REGEX = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-// const PHONE_REGEX = /^01[0125][0-9]{8}$/;
-// const EMAIL_REGEX =
-//   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
 const REGEX = {
   NAME_REGEX: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
   PHONE_REGEX: /^01[0125][0-9]{8}$/,
@@ -69,7 +64,6 @@ function EmpForm() {
   } = formEmployee;
   const { nameTouched, phoneTouched, emailTouched } = formEmployeeFlags;
   const { nameValid, phoneValid, emailValid } = formEmployeeValidation;
-  const { NAME_REGEX, EMAIL_REGEX, PHONE_REGEX } = REGEX;
 
   // handle image drag&drop
   const handleDrop = (acceptedFiles) => {
@@ -94,7 +88,7 @@ function EmpForm() {
   const handleCheck = (e) => {
     setFormEmployee((prev) => ({
       ...prev,
-      WFH: !prev?.WFH,
+      WFH: !prev.WFH,
     }));
   };
 
@@ -105,11 +99,11 @@ function EmpForm() {
   const onRequiredTypeChange = ({ requiredMarkValue }) => {
     setRequiredMarkType(requiredMarkValue);
   };
-  const handleFormChange = (e, selectedName) => {
-    if (selectedName) {
+  const handleFormChange = (e, inputName) => {
+    if (inputName) {
       setFormEmployee((prev) => ({
         ...prev,
-        [selectedName]: e,
+        [inputName]: e,
       }));
     } else {
       const { value, name } = e.target;
@@ -120,6 +114,14 @@ function EmpForm() {
       handleFormValidation(name, value);
     }
   };
+  const handleFormValidation = (name, value) => {
+    const inp = name.toUpperCase();
+    const result = REGEX[`${inp}_REGEX`].test(value);
+    setFormEmployeeValidation((prev) => ({
+      ...prev,
+      [`${name}Valid`]: result,
+    }));
+  };
   const handleSubmit = () => {
     if (department === "" || position === "" || selectedDate === null) {
       setErr(true);
@@ -127,31 +129,34 @@ function EmpForm() {
       toast.error("Fill The Required Fields Before Saving.");
       return;
     }
-    // if (!validName) {
-    //   toast.error("Invalid Name");
-    //   return;
-    // }
-    // if (!validPhone) {
-    //   toast.error("Invalid Phone Number");
-    //   return;
-    // }
-    // if (!validEmail) {
-    //   toast.error("Invalid Email Entry");
-    //   return;
-    // }
-
+    if (!nameValid) {
+      toast.error("Invalid Name");
+      return;
+    }
+    if (!phoneValid) {
+      toast.error("Invalid Phone Number");
+      return;
+    }
+    if (!emailValid) {
+      toast.error("Invalid Email Entry");
+      return;
+    }
     handleAddEmployee(formEmployee);
     toast.success("New Employee Successfully Saved!");
     setFormEmployee(initialFormValues);
+    setFormEmployeeFlags(initialFormFlags);
+    setFormEmployeeValidation(initialFormValidation);
     setSelectedDate(null);
     setOpen(false);
     form.resetFields();
   };
+
   const handleCancel = () => {
     setOpen(false);
     setFormEmployee(initialFormValues);
+    setFormEmployeeFlags(initialFormFlags);
+    setFormEmployeeValidation(initialFormValidation);
     setSelectedDate(null);
-    setOpen(false);
     form.resetFields();
   };
   const handleFormFlags = (e) => {
@@ -171,86 +176,9 @@ function EmpForm() {
         break;
       default:
         break;
-
-      // switch (e.target.name) {
-      //   case "name":
-      //     console.log("name");
-      //     break;
-      //   case "email":
-      //     console.log("email");
-      //     break;
-      //   case "phone":
-      //     break;
-      //   default:
-      //     break;
-      // }
     }
-    // console.log(`${e.target.name}Valid`);
-    // setFormEmployeeValidation((prev) => ({
-    //   ...prev,
-    //   [`${e.target.name}Valid`]: e.target.value,
-    // }));
   };
 
-  const handleFormValidation = (name, value) => {
-    const inp = name.toUpperCase();
-    const result = REGEX[`${inp}_REGEX`].test(value);
-    setFormEmployeeValidation((prev) => ({
-      ...prev,
-      [`${name}Valid`]: result,
-    }));
-  };
-
-  // useEffect(() => {
-  //   if (
-  //     name === "" ||
-  //     phone === "" ||
-  //     email === "" ||
-  //     department === "" ||
-  //     position === "" ||
-  //     selectedDate === null
-  //   ) {
-  //     setErr(false);
-  //   }
-  // }, [formEmployee, selectedDate]);
-
-  // useEffect(() => {
-  //   const result = PHONE_REGEX.test(phone);
-  //   if (phone.length < 11 || !result) {
-  //     setFormEmployeeValidation((prev) => ({
-  //       ...prev,
-  //       phoneValid: false,
-  //     }));
-  //   } else {
-  //     setFormEmployeeValidation((prev) => ({
-  //       ...prev,
-  //       phoneValid: true,
-  //     }));
-  //   }
-  // }, [phone]);
-
-  // useEffect(() => {
-  //   const result = NAME_REGEX.test(name);
-  //   setFormEmployeeValidation((prev) => ({
-  //     ...prev,
-  //     nameValid: result,
-  //   }));
-  // }, [name]);
-
-  // useEffect(() => {
-  //   const result = EMAIL_REGEX.test(email);
-  //   setFormEmployeeValidation((prev) => ({
-  //     ...prev,
-  //     emailValid: result,
-  //   }));
-  // }, [email]);
-
-  // useEffect(() => {}, [formEmployee]);
-
-  // will delete
-  useEffect(() => {
-    console.log(formEmployeeValidation);
-  }, [formEmployeeValidation, formEmployeeFlags]);
   return (
     <div>
       <Button

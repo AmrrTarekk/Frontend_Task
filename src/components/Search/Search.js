@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Input, Modal } from "antd";
+import React from "react";
+import { Input } from "antd";
 import "./search.css";
 import EmpForm from "../Form/EmpForm";
 import useEmp from "../../hooks/useEmp";
@@ -13,7 +13,7 @@ function Search() {
     setQuery(e.target.value);
   };
   return (
-    <div className="d-flex justify-content-between gap-3">
+    <div className="d-flex justify-content-between gap-3 mb-4 mb-md-5">
       <Input
         className="rounded-2 searchInput"
         type="text"

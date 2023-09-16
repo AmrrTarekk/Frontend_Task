@@ -1,48 +1,54 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 const EmpContext = createContext({});
 
 export const EmpProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);
+  const [filteredEmployee, setFilteredEmployee] = useState([]);
   const [query, setQuery] = useState("");
 
-  const handleAddEmployee = (
-    empName,
-    empPhone,
-    empEmail,
+  const handleAddEmployee = ({
+    name,
+    phone,
+    email,
     department,
     position,
-    selectedImage,
+    image,
     date,
     office,
-    attendance,
-    role
-  ) => {
+    attendanceProfile,
+    role,
+  }) => {
+    const nameArr = name.toLowerCase().split(" ");
+    for (var i = 0; i < nameArr.length; i++) {
+      nameArr[i] = nameArr[i].charAt(0).toUpperCase() + nameArr[i].slice(1);
+    }
+    name = nameArr.join(" ");
     setEmployees((employees) => [
       ...employees,
       {
-        name: empName,
-        phone: empPhone,
-        email: empEmail,
+        name,
+        phone,
+        email,
         department,
         position,
-        selectedImage: selectedImage,
+        image,
         id: crypto.randomUUID(),
         date,
         office,
-        attendance,
+        attendanceProfile,
         role,
       },
     ]);
   };
 
-  let filteredEmployee = employees;
-
-  if (query.length >= 2) {
-    filteredEmployee = filteredEmployee.filter((emp) =>
-      emp.name.toLowerCase().startsWith(query.toLowerCase())
+  useEffect(() => {
+    setFilteredEmployee(
+      employees.filter((emp) =>
+        emp.name.toLowerCase().startsWith(query.toLowerCase())
+      )
     );
-  }
+  }, [employees, query]);
 
   return (
     <EmpContext.Provider

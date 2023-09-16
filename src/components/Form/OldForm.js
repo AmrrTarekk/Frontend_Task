@@ -8,177 +8,179 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-hot-toast";
 
-const REGEX = {
-  NAME_REGEX: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
-  PHONE_REGEX: /^01[0125][0-9]{8}$/,
-  EMAIL_REGEX:
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-};
+const NAME_REGEX = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+const PHONE_REGEX = /^01[0125][0-9]{8}$/;
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const DATE_REGEX =
+  /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
 
-const initialFormValues = {
-  image: "",
-  name: "",
-  phone: "",
-  date: "",
-  email: "",
-  office: "",
-  department: "",
-  role: "",
-  attendanceProfile: "",
-  position: "",
-  WFH: false,
-};
-const initialFormFlags = {
-  nameFocus: false,
-  nameTouched: false,
-  phoneFocus: false,
-  phoneTouched: false,
-  emailFocus: false,
-  emailTouched: false,
-};
-const initialFormValidation = {
-  nameValid: false,
-  phoneValid: false,
-  emailValid: false,
-};
 function EmpForm() {
   const [open, setOpen] = useState(false);
   const { handleAddEmployee } = useEmp();
-  const [formEmployee, setFormEmployee] = useState(initialFormValues);
-  const [formEmployeeFlags, setFormEmployeeFlags] = useState(initialFormFlags);
-  const [formEmployeeValidation, setFormEmployeeValidation] = useState(
-    initialFormValidation
-  );
-  const {
-    image,
-    name,
-    phone,
-    date,
-    email,
-    department,
-    office,
-    attendanceProfile,
-    role,
-    position,
-    WFH,
-  } = formEmployee;
-  const { nameTouched, phoneTouched, emailTouched } = formEmployeeFlags;
-  const { nameValid, phoneValid, emailValid } = formEmployeeValidation;
 
-  // handle image drag&drop
-  const handleDrop = (acceptedFiles) => {
-    setFormEmployee((prev) => ({
-      ...prev,
-      image: acceptedFiles[0],
-    }));
-  };
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: handleDrop,
-  });
-  // handle date input
+  const [empName, setEmpName] = useState("");
+  const [validName, setValidName] = useState(false);
+  const [nameFocus, setNameFocus] = useState(false);
+
+  const [phone, setPhone] = useState("");
+  const [validPhone, setValidPhone] = useState(false);
+  const [phoneFocus, setPhoneFocus] = useState(false);
+
+  const [empEmail, setEmpEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+
+  const [department, setDepartment] = useState("");
+  const [office, setOffice] = useState("");
+  const [attendance, setAttendance] = useState("");
+  const [role, setRole] = useState("");
+  const [position, setPosition] = useState("");
+  const [check, setCheck] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const [selectedDate, setSelectedDate] = useState(null);
-  const handleDateChange = (date, dateString) => {
-    setSelectedDate(date);
-    setFormEmployee((prev) => ({
-      ...prev,
-      date: dateString.split("-"),
-    }));
-  };
-  // handle checkbox
-  const handleCheck = (e) => {
-    setFormEmployee((prev) => ({
-      ...prev,
-      WFH: !prev.WFH,
-    }));
-  };
+  const [dateContext, setDateContext] = useState("");
+  const [validDate, setValidDate] = useState(false);
+  const [dateFocus, setDateFocus] = useState(false);
 
   const [err, setErr] = useState(false);
+
+  const handleDateChange = (date, dateString) => {
+    setSelectedDate(date);
+    setDateContext(dateString);
+  };
 
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState("optional");
   const onRequiredTypeChange = ({ requiredMarkValue }) => {
     setRequiredMarkType(requiredMarkValue);
   };
-  const handleFormChange = (e, inputName) => {
-    if (inputName) {
-      setFormEmployee((prev) => ({
-        ...prev,
-        [inputName]: e,
-      }));
+
+  const handleDrop = (acceptedFiles) => {
+    setSelectedImage(acceptedFiles[0]);
+  };
+
+  const handleCheck = () => {
+    setCheck(!check);
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: handleDrop,
+  });
+
+  useEffect(() => {
+    const result = NAME_REGEX.test(empName);
+    setValidName(result);
+  }, [empName]);
+
+  useEffect(() => {
+    const result = PHONE_REGEX.test(phone);
+    if (phone.length < 11 || !result) {
+      setValidPhone(false);
     } else {
-      const { value, name } = e.target;
-      setFormEmployee((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-      handleFormValidation(name, value);
+      setValidPhone(true);
     }
-  };
-  const handleFormValidation = (name, value) => {
-    const inp = name.toUpperCase();
-    const result = REGEX[`${inp}_REGEX`].test(value);
-    setFormEmployeeValidation((prev) => ({
-      ...prev,
-      [`${name}Valid`]: result,
-    }));
-  };
+  }, [phone]);
+
+  useEffect(() => {
+    const result = DATE_REGEX.test(dateContext);
+    setValidDate(result);
+  }, [dateContext]);
+
+  useEffect(() => {
+    const result = EMAIL_REGEX.test(empEmail);
+    setValidEmail(result);
+  }, [empEmail]);
+
   const handleSubmit = () => {
-    if (department === "" || position === "" || selectedDate === null) {
+    if (
+      empName === "" ||
+      phone === "" ||
+      empEmail === "" ||
+      department === "" ||
+      position === "" ||
+      selectedDate === null
+    ) {
       setErr(true);
 
       toast.error("Fill The Required Fields Before Saving.");
       return;
     }
-    if (!nameValid) {
+    if (!validName) {
       toast.error("Invalid Name");
       return;
     }
-    if (!phoneValid) {
+    if (!validPhone) {
       toast.error("Invalid Phone Number");
       return;
     }
-    if (!emailValid) {
+    if (!validEmail) {
       toast.error("Invalid Email Entry");
       return;
     }
-    handleAddEmployee(formEmployee);
+    if (!validDate) {
+      toast.error("Invalid Date");
+      return;
+    }
+
+    handleAddEmployee(
+      empName,
+      phone,
+      empEmail,
+      department,
+      position,
+      selectedImage,
+      dateContext.split("-"),
+      office,
+      attendance,
+      role
+    );
     toast.success("New Employee Successfully Saved!");
-    setFormEmployee(initialFormValues);
-    setFormEmployeeFlags(initialFormFlags);
-    setFormEmployeeValidation(initialFormValidation);
+    setEmpEmail("");
+    setEmpName("");
+    setDepartment("");
+    setPhone("");
+    setPosition("");
     setSelectedDate(null);
+    setSelectedImage(null);
+    setOffice("");
+    setAttendance("");
+    setRole("");
     setOpen(false);
+    setCheck(false);
     form.resetFields();
   };
+
+  useEffect(() => {
+    if (
+      empName === "" ||
+      phone === "" ||
+      empEmail === "" ||
+      department === "" ||
+      position === "" ||
+      selectedDate === null
+    ) {
+      setErr(false);
+    }
+  }, [empName, phone, empEmail, department, position, selectedDate]);
 
   const handleCancel = () => {
     setOpen(false);
-    setFormEmployee(initialFormValues);
-    setFormEmployeeFlags(initialFormFlags);
-    setFormEmployeeValidation(initialFormValidation);
+    setEmpEmail("");
+    setEmpName("");
+    setDepartment("");
+    setPhone("");
+    setPosition("");
     setSelectedDate(null);
+    setSelectedImage(null);
+    setOffice("");
+    setAttendance("");
+    setRole("");
+    setOpen(false);
+    setCheck(false);
     form.resetFields();
   };
-  const handleFormFlags = (e) => {
-    switch (e.type) {
-      case "focus":
-        setFormEmployeeFlags((prev) => ({
-          ...prev,
-          [`${e.target.name}Focus`]: true,
-          [`${e.target.name}Touched`]: true,
-        }));
-        break;
-      case "blur":
-        setFormEmployeeFlags((prev) => ({
-          ...prev,
-          [`${e.target.name}Focus`]: false,
-        }));
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
     <div>
       <Button
@@ -215,29 +217,29 @@ function EmpForm() {
             </h5>
             {/* Image Uploader */}
             <div className="col-4 ">
-              {image && (
+              {selectedImage && (
                 <div className="text-center w-100 d-flex flex-column gap-2 justify-content-around h-100  align-items-center ">
                   <img
                     alt="cardPic"
                     className="cardPic"
-                    src={URL.createObjectURL(image)}
+                    src={URL.createObjectURL(selectedImage)}
                   />
                   <Button
                     type="primary"
                     className=" text-center"
-                    onClick={(prev) => setFormEmployee({ ...prev, image: "" })}
+                    onClick={() => setSelectedImage(null)}
                   >
                     Remove
                   </Button>
                 </div>
               )}
-              {!image && (
+              {!selectedImage && (
                 <Form.Item className="dragBox mt-2 " label="">
                   <div
                     {...getRootProps()}
                     className={`drop-zone ${isDragActive ? "dragging" : ""}`}
                   >
-                    <input name="image" {...getInputProps()} />
+                    <input {...getInputProps()} />
                     {isDragActive ? (
                       <span className="DRAG-IMAGE-HERE">DRAG IMAGE HERE</span>
                     ) : (
@@ -258,12 +260,11 @@ function EmpForm() {
                 }}
               >
                 <Input
-                  className={nameTouched && !nameValid ? "invalidInput" : ""}
-                  name="name"
-                  value={name}
-                  onChange={handleFormChange}
-                  onFocus={handleFormFlags}
-                  onBlur={handleFormFlags}
+                  className={nameFocus && !validName ? "invalidInput" : ""}
+                  onChange={(e) => setEmpName(e.target.value)}
+                  value={empName}
+                  onFocus={() => setNameFocus(true)}
+                  onBlur={() => setNameFocus(false)}
                   placeholder="Enter you full name"
                 />
               </Form.Item>
@@ -278,12 +279,11 @@ function EmpForm() {
               >
                 <Input
                   type="number"
-                  name="phone"
+                  className={phoneFocus && !validPhone ? "invalidInput" : ""}
+                  onChange={(e) => setPhone(e.target.value)}
+                  onFocus={() => setPhoneFocus(true)}
+                  onBlur={() => setPhoneFocus(false)}
                   value={phone}
-                  className={phoneTouched && !phoneValid ? "invalidInput" : ""}
-                  onChange={handleFormChange}
-                  onFocus={handleFormFlags}
-                  onBlur={handleFormFlags}
                   placeholder="01.."
                 />
               </Form.Item>
@@ -300,8 +300,11 @@ function EmpForm() {
               >
                 <Space direction="vertical" className="w-100">
                   <DatePicker
-                    name="date"
-                    className="w-100 "
+                    className={
+                      dateFocus && !validDate ? "w-100 invalidInput" : "w-100"
+                    }
+                    onFocus={() => setDateFocus(true)}
+                    onBlur={() => setDateFocus(false)}
                     value={selectedDate}
                     onChange={handleDateChange}
                   />
@@ -318,12 +321,11 @@ function EmpForm() {
               >
                 <Input
                   type="email"
-                  name="email"
-                  value={email}
-                  onChange={handleFormChange}
-                  className={emailTouched && !emailValid ? "invalidInput" : ""}
-                  onFocus={handleFormFlags}
-                  onBlur={handleFormFlags}
+                  onChange={(e) => setEmpEmail(e.target.value)}
+                  className={emailFocus && !validEmail ? "invalidInput" : ""}
+                  onFocus={() => setEmailFocus(true)}
+                  onBlur={() => setEmailFocus(false)}
+                  value={empEmail}
                   placeholder="Enter you email"
                 />
               </Form.Item>
@@ -337,11 +339,18 @@ function EmpForm() {
             <div className="col-12">
               <Form.Item label="Office">
                 <Select
-                  name="office"
                   value={office === "" ? null : office}
                   placeholder="Select"
-                  onChange={(e) => handleFormChange(e, "office")}
+                  onChange={(e) => setOffice(e)}
                 >
+                  {/* <Select.Option
+                    value=""
+                    className="selectedOp"
+                    disabled
+                    selected
+                  >
+                    Select
+                  </Select.Option> */}
                   <Select.Option value="Arabic Localizer">
                     Arabic Localizer
                   </Select.Option>
@@ -359,10 +368,9 @@ function EmpForm() {
                 label="Department"
               >
                 <Select
-                  name="department"
                   value={department === "" ? null : department}
                   placeholder="Select"
-                  onChange={(e) => handleFormChange(e, "department")}
+                  onChange={(e) => setDepartment(e)}
                 >
                   <Select.Option value="Backend Team">
                     Backend Team
@@ -380,10 +388,9 @@ function EmpForm() {
             <div className="col-sm-6 col-12">
               <Form.Item label="Attendance Profile">
                 <Select
-                  name="attendanceProfile"
-                  value={attendanceProfile === "" ? null : attendanceProfile}
+                  value={attendance === "" ? null : attendance}
                   placeholder="Select"
-                  onChange={(e) => handleFormChange(e, "attendanceProfile")}
+                  onChange={(e) => setAttendance(e)}
                 >
                   <Select.Option value="none">none</Select.Option>
                 </Select>
@@ -393,10 +400,9 @@ function EmpForm() {
             <div className="col-sm-6 col-12">
               <Form.Item label="Role">
                 <Select
-                  name="role"
                   value={role === "" ? null : role}
                   placeholder="Select"
-                  onChange={(e) => handleFormChange(e, "role")}
+                  onChange={(e) => setRole(e)}
                 >
                   <Select.Option value="Employee">Employee</Select.Option>
                 </Select>
@@ -413,10 +419,9 @@ function EmpForm() {
                 label="Position"
               >
                 <Select
-                  name="position"
                   value={position === "" ? null : position}
                   placeholder="Select"
-                  onChange={(e) => handleFormChange(e, "position")}
+                  onChange={(e) => setPosition(e)}
                 >
                   <Select.Option value="Backend Developer">
                     Backend Developer
@@ -438,7 +443,7 @@ function EmpForm() {
               <div className="d-flex align-items-center gap-2">
                 <input
                   type="checkbox"
-                  checked={WFH}
+                  checked={check}
                   onChange={handleCheck}
                   id="WFH"
                   name="WFH"

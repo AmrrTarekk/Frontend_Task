@@ -26,6 +26,9 @@
   width: 64px;
   height: 64px;
 }
+.mt6 {
+  margin-top: 0.6rem !important;
+}
 
 .Line-200 {
   width: 0;
@@ -39,7 +42,6 @@
   color: #8997a4;
   font-size: 0.6rem;
 }
-
 .icons span {
   cursor: pointer;
 }
@@ -67,7 +69,7 @@
 .HR-Head {
   width: fit-content;
   height: 15px;
-  margin: 1px 1px 0px 23.5px;
+  margin: 0px 1px 0px 23.5px;
   font-family: Roboto Regular;
   font-size: 13px;
   font-weight: normal;
@@ -82,7 +84,7 @@
 .business-development {
   width: fit-content;
   height: 13px;
-  margin: 1px 1px 5px 23.5px;
+  margin: 2px 1px 9px 23.5px;
   font-family: Roboto Regular;
   font-size: 10px;
   font-weight: normal;
@@ -125,7 +127,7 @@
 .info-icons {
   background-color: #eaeef0;
   border-radius: 50%;
-  font-size: 10px;
+  font-size: 7px;
   width: 20px;
   height: 20px;
   display: flex;
@@ -135,9 +137,12 @@
 }
 
 .info {
-  font-size: 13px;
+  font-size: 10px;
 }
 
+.info-icons:hover {
+  box-shadow: 0 4px 8px 1px rgb(0 0 0 / 25%);
+}
 .ant-tooltip {
   --antd-arrow-background-color: white;
 }
@@ -147,8 +152,6 @@
   color: black;
   --antd-arrow-background-color: white;
 }
-
-
 
 .ant-tooltip {
   max-width: 280px !important;
@@ -178,11 +181,9 @@
     gap: 25px !important;
     justify-content: start !important;
   }
-
 }
 
 @media only screen and (min-width: 650px) and (max-width: 750px) {
-
   .ant-tooltip-placement-topLeft .ant-tooltip-inner {
     max-width: 147px !important;
     text-align: center !important;
@@ -202,6 +203,4 @@
   .w-md-100 {
     width: 100% !important;
   }
-
-
 }

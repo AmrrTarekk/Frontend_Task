@@ -28,28 +28,28 @@ function EmpCards() {
           <Card className="Path-120" style={{ width: "24rem" }} key={emp.id}>
             <div className="HR---Employees3 d-flex  ">
               <div>
-                {emp.selectedImage ? (
-                  <div className=" d-flex flex-column justify-content-center align-items-center  mt-3 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
+                {emp.image ? (
+                  <div className=" d-flex flex-column justify-content-center align-items-center  mt6 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
                     <img
                       alt="cardImage"
                       className=""
                       variant="top"
-                      src={URL.createObjectURL(emp.selectedImage)}
+                      src={URL.createObjectURL(emp.image)}
                     />
-                    <div className="icons d-flex gap-3 mt-1">
+                    <div className="icons d-flex gap-3 mt-2">
                       <span>
-                        <FontAwesomeIcon icon={faPen} />
+                        <FontAwesomeIcon title="Edit" icon={faPen} />
                       </span>
                       <span>
                         <FontAwesomeIcon icon={faCirclePause} />
                       </span>
                       <span onClick={() => handleDelete(emp.id)}>
-                        <FontAwesomeIcon icon={faTrashCan} />
+                        <FontAwesomeIcon title="Delete" icon={faTrashCan} />
                       </span>
                     </div>
                   </div>
                 ) : (
-                  <div className=" d-flex flex-column justify-content-center align-items-center  mt-3 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
+                  <div className=" d-flex flex-column justify-content-center align-items-center  mt6 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
                     <img
                       alt="cardImage"
                       className=""
@@ -58,13 +58,13 @@ function EmpCards() {
                     />
                     <div className="icons d-flex gap-3 mt-1">
                       <span>
-                        <FontAwesomeIcon icon={faPen} />
+                        <FontAwesomeIcon title="Edit" icon={faPen} />
                       </span>
                       <span>
                         <FontAwesomeIcon icon={faCirclePause} />
                       </span>
                       <span onClick={() => handleDelete(emp.id)}>
-                        <FontAwesomeIcon icon={faTrashCan} />
+                        <FontAwesomeIcon title="Delete" icon={faTrashCan} />
                       </span>
                     </div>
                   </div>
@@ -72,7 +72,7 @@ function EmpCards() {
               </div>
               <div className="Line-200"></div>
               <div className="card-info d-flex flex-column w-100">
-                <h5 className="mb-0 mb-sm-1">
+                <h5 className="mb-0">
                   <span className="sara-khaled-ahmed ">
                     <Tooltip placement="topLeft" title={emp.name}>
                       {emp.name}

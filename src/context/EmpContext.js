@@ -1,9 +1,10 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 const EmpContext = createContext({});
 
 export const EmpProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);
+  const [filteredEmployee, setFilteredEmployee] = useState([]);
   const [query, setQuery] = useState("");
 
   const handleAddEmployee = (
@@ -36,13 +37,13 @@ export const EmpProvider = ({ children }) => {
     ]);
   };
 
-  let filteredEmployee = employees;
-
-  if (query.length >= 2) {
-    filteredEmployee = filteredEmployee.filter((emp) =>
-      emp.name.toLowerCase().startsWith(query.toLowerCase())
+  useEffect(() => {
+    setFilteredEmployee(
+      employees.filter((emp) =>
+        emp.name.toLowerCase().startsWith(query.toLowerCase())
+      )
     );
-  }
+  }, [employees, query]);
 
   return (
     <EmpContext.Provider

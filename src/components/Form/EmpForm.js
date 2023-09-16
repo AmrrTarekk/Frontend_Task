@@ -6,7 +6,7 @@ import useEmp from "../../hooks/useEmp";
 import { useDropzone } from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 const NAME_REGEX = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
 const PHONE_REGEX = /^01[0125][0-9]{8}$/;

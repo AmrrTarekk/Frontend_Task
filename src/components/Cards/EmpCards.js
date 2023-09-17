@@ -56,7 +56,7 @@ function EmpCards() {
                       variant="top"
                       src="./profile.jpg"
                     />
-                    <div className="icons d-flex gap-3 mt-1">
+                    <div className="icons d-flex gap-3 mt-2">
                       <span>
                         <FontAwesomeIcon title="Edit" icon={faPen} />
                       </span>

@@ -38,7 +38,7 @@ function EditForm({ id }) {
         setOpen={setOpen}
         nameCard={name}
         phoneCard={phone}
-        dateCard={date.join("-")}
+        dateCard={date}
         dateFormatCard={dateFormat}
         emailCard={email}
         officeCard={office}

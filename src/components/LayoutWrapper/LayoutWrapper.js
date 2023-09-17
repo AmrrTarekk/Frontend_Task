@@ -19,7 +19,7 @@ function LayoutWrapper({ children }) {
           }}
         >
           <NavbarSec />
-          <Content style={{ backgroundColor: "#fff", height: "90vh" }}>
+          <Content style={{ backgroundColor: "#fff", height: "93vh" }}>
             <div className="wrapper">{children}</div>
           </Content>
         </Layout>

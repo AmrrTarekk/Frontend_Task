@@ -26,6 +26,7 @@
   width: 64px;
   height: 64px;
 }
+
 .mt6 {
   margin-top: 0.6rem !important;
 }
@@ -42,6 +43,7 @@
   color: #8997a4;
   font-size: 0.6rem;
 }
+
 .icons span {
   cursor: pointer;
 }
@@ -143,6 +145,7 @@
 .info-icons:hover {
   box-shadow: 0 4px 8px 1px rgb(0 0 0 / 25%);
 }
+
 .ant-tooltip {
   --antd-arrow-background-color: white;
 }
@@ -182,6 +185,14 @@
     justify-content: start !important;
   }
 }
+
+@media only screen and (min-width: 400px) and (max-width: 460px) {
+  .HR---Employees3 .present-icons {
+    gap: 60px !important;
+    justify-content: start !important;
+  }
+}
+
 
 @media only screen and (min-width: 650px) and (max-width: 750px) {
   .ant-tooltip-placement-topLeft .ant-tooltip-inner {

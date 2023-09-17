@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Button, Modal, Form, Input, Select, DatePicker, Space } from "antd";
 import "./EmpForm.css";
@@ -258,7 +258,9 @@ function EmpForm() {
                 }}
               >
                 <Input
-                  className={nameTouched && !nameValid ? "invalidInput" : ""}
+                  className={
+                    nameTouched && name && !nameValid ? "invalidInput" : ""
+                  }
                   name="name"
                   value={name}
                   onChange={handleFormChange}
@@ -280,7 +282,9 @@ function EmpForm() {
                   type="number"
                   name="phone"
                   value={phone}
-                  className={phoneTouched && !phoneValid ? "invalidInput" : ""}
+                  className={
+                    phoneTouched && phone && !phoneValid ? "invalidInput" : ""
+                  }
                   onChange={handleFormChange}
                   onFocus={handleFormFlags}
                   onBlur={handleFormFlags}
@@ -321,7 +325,9 @@ function EmpForm() {
                   name="email"
                   value={email}
                   onChange={handleFormChange}
-                  className={emailTouched && !emailValid ? "invalidInput" : ""}
+                  className={
+                    emailTouched && email && !emailValid ? "invalidInput" : ""
+                  }
                   onFocus={handleFormFlags}
                   onBlur={handleFormFlags}
                   placeholder="Enter you email"

@@ -48,7 +48,6 @@ export const EmpProvider = ({ children }) => {
         }
         return obj;
       });
-      // console.log(employees);
       setEmployees(newEmployees);
     } else {
       setEmployees((employees) => [
@@ -69,48 +68,6 @@ export const EmpProvider = ({ children }) => {
         },
       ]);
     }
-
-    // if (existed) {
-    //   const newEmployees = employees.map((obj) => {
-    //     if (obj.id === id) {
-    //       return {
-    //         ...obj,
-    //         name,
-    //         phone,
-    //         email,
-    //         department,
-    //         position,
-    //         image,
-    //         date,
-    //         dateFormat,
-    //         office,
-    //         attendanceProfile,
-    //         role,
-    //       };
-    //     }
-    //     return obj;
-    //   });
-    //   // console.log(employees);
-    //   setEmployees(newEmployees);
-    // } else {
-    //   setEmployees((employees) => [
-    //     ...employees,
-    //     {
-    //       name,
-    //       phone,
-    //       email,
-    //       department,
-    //       position,
-    //       image,
-    //       id,
-    //       date,
-    //       dateFormat,
-    //       office,
-    //       attendanceProfile,
-    //       role,
-    //     },
-    //   ]);
-    // }
   };
 
   useEffect(() => {
@@ -121,11 +78,6 @@ export const EmpProvider = ({ children }) => {
       )
     );
   }, [employees, query]);
-
-  // useEffect(() => {
-  //   console.log(employees);
-  // }, [employees]);
-
   return (
     <EmpContext.Provider
       value={{

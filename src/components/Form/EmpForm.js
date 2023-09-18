@@ -33,6 +33,7 @@ function EmpForm({
   WFHCard,
   touched,
   valid,
+  idCard,
 }) {
   const initialFormFlags = {
     nameFocus: false,
@@ -48,18 +49,19 @@ function EmpForm({
     emailValid: false || valid,
   };
   const initialFormValues = {
-    image: "" || imageCard,
-    name: "" || nameCard,
-    phone: "" || phoneCard,
-    date: "" || dateCard,
-    dateFor: null || dateFormatCard,
-    email: "" || emailCard,
-    office: "" || officeCard,
-    department: "" || departmentCard,
-    role: "" || roleCard,
-    attendanceProfile: "" || attendanceProfileCard,
-    position: "" || positionCard,
-    WFH: false || WFHCard,
+    image: imageCard || "",
+    name: nameCard || "",
+    phone: phoneCard || "",
+    date: dateCard || "",
+    dateFor: dateFormatCard || null,
+    email: emailCard || "",
+    office: officeCard || "",
+    department: departmentCard || "",
+    role: roleCard || "",
+    attendanceProfile: attendanceProfileCard || "",
+    position: positionCard || "",
+    WFH: WFHCard || false,
+    id: idCard || crypto.randomUUID(),
   };
 
   const { handleAddEmployee } = useEmp();
@@ -153,7 +155,6 @@ function EmpForm({
   const handleSubmit = () => {
     if (department === "" || position === "" || selectedDate === null) {
       setErr(true);
-
       toast.error("Fill The Required Fields Before Saving.");
       return;
     }

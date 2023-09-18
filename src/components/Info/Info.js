@@ -1,7 +1,7 @@
 import React from "react";
 import "./Info.css";
 function Info({ office, role, date }) {
-  if (office === "" || role === "") {
+  if (!office || !role) {
     office = "Not Specified";
     role = "Not Specified";
   }

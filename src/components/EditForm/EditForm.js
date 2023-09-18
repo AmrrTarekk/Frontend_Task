@@ -1,6 +1,5 @@
-import { faPenAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPenAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "antd";
 import { useState } from "react";
 import EmpForm from "../Form/EmpForm";
 import useEmp from "../../hooks/useEmp";
@@ -23,7 +22,6 @@ function EditForm({ id }) {
     role,
     position,
     dateFormat,
-    // WFH,
   } = editableEmployee;
   return (
     <div>
@@ -48,6 +46,7 @@ function EditForm({ id }) {
         positionCard={position}
         touched={true}
         valid={true}
+        idCard={id}
       />
     </div>
   );

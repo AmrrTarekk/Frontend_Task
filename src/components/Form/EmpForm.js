@@ -8,7 +8,7 @@ import { useDropzone } from "react-dropzone";
 import { toast } from "react-hot-toast";
 
 const REGEX = {
-  NAME_REGEX: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
+  NAME_REGEX: /^[A-Za-z\u0600-\u06FF\s]*$/,
   PHONE_REGEX: /^01[0125][0-9]{8}$/,
   EMAIL_REGEX:
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,

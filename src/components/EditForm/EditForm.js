@@ -7,8 +7,10 @@ import useEmp from "../../hooks/useEmp";
 function EditForm({ id }) {
   const [open, setOpen] = useState(false);
   const { filteredEmployee } = useEmp();
+  // const [editableEmployee, setEditableEmployee] = useState({})
 
   const editableEmployee = filteredEmployee.find((emp) => emp.id === id);
+  // console.log(editableEmployee, "emo");
 
   const {
     image,
@@ -22,6 +24,7 @@ function EditForm({ id }) {
     role,
     position,
     dateFormat,
+    WFH,
   } = editableEmployee;
   return (
     <div>
@@ -47,6 +50,7 @@ function EditForm({ id }) {
         touched={true}
         valid={true}
         idCard={id}
+        WFHCard={WFH}
       />
     </div>
   );

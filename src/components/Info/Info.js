@@ -1,21 +1,21 @@
 import React from "react";
 import "./Info.css";
 function Info({ office, role, date }) {
-  if (!office || !role) {
-    office = "Not Specified";
-    role = "Not Specified";
-  }
+  // if (!office || !role) {
+  //   office = "Not Specified";
+  //   role = "Not Specified";
+  // }
   return (
     <div className="infoCard d-flex flex-wrap column-gap-3 justify-content-start m-0 p-0 ">
       <p>
         Office
         <br />
-        <span>{office}</span>
+        <span>{office ? office : "Not Specified"}</span>
       </p>
       <p>
         Role
         <br />
-        <span>{role}</span>
+        <span>{role ? role : "Not Specified"}</span>
       </p>
       <p>
         Copied Manager

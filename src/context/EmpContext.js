@@ -2,6 +2,14 @@ import React, { createContext, useEffect, useState } from "react";
 
 const EmpContext = createContext({});
 
+function capitalizeName(name) {
+  const nameArr = name.toLowerCase().split(" ");
+  for (var i = 0; i < nameArr.length; i++) {
+    nameArr[i] = nameArr[i].charAt(0).toUpperCase() + nameArr[i].slice(1);
+  }
+  return nameArr.join(" ");
+}
+
 export const EmpProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);
   const [filteredEmployee, setFilteredEmployee] = useState([]);
@@ -20,12 +28,10 @@ export const EmpProvider = ({ children }) => {
     attendanceProfile,
     role,
     id,
+    WFH,
   }) => {
-    const nameArr = name.toLowerCase().split(" ");
-    for (var i = 0; i < nameArr.length; i++) {
-      nameArr[i] = nameArr[i].charAt(0).toUpperCase() + nameArr[i].slice(1);
-    }
-    name = nameArr.join(" ");
+    console.log(name, "name");
+    name = capitalizeName(name);
 
     const editableEmployee = filteredEmployee.find((emp) => emp.id === id);
     if (editableEmployee) {
@@ -44,6 +50,7 @@ export const EmpProvider = ({ children }) => {
             office,
             attendanceProfile,
             role,
+            WFH,
           };
         }
         return obj;
@@ -65,6 +72,7 @@ export const EmpProvider = ({ children }) => {
           office,
           attendanceProfile,
           role,
+          WFH,
         },
       ]);
     }

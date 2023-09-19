@@ -84,10 +84,17 @@ function EmpCards() {
                   <span className="HR-Head">{emp.position}</span>
                   <span className="business-development">{emp.department}</span>
                 </div>
+
                 <div className="present-icons d-flex justify-content-between">
-                  <div className="Rectangle-1520">
-                    <span className="present">Present</span>
-                  </div>
+                  {emp.WFH ? (
+                    <div className="Rectangle-1520">
+                      <span className="present">Present</span>
+                    </div>
+                  ) : (
+                    <div className="Rectangle-1520">
+                      <span className="present">Home</span>
+                    </div>
+                  )}
 
                   <div className="contacts d-flex flex-row gap-2">
                     <Tooltip placement="bottom" title={emp.email}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Button, Modal, Form, Input, Select, DatePicker, Space } from "antd";
 import "./EmpForm.css";
@@ -48,21 +48,37 @@ function EmpForm({
     phoneValid: valid || false,
     emailValid: valid || false,
   };
-  const initialFormValues = {
-    image: imageCard || "",
-    name: nameCard || "",
-    phone: phoneCard || "",
-    date: dateCard || "",
-    dateFormat: dateFormatCard || null,
-    email: emailCard || "",
-    office: officeCard || "",
-    department: departmentCard || "",
-    role: roleCard || "",
-    attendanceProfile: attendanceProfileCard || "",
-    position: positionCard || "",
-    WFH: WFHCard || false,
-    id: idCard || crypto.randomUUID(),
-  };
+  const initialFormValues = useMemo(() => {
+    return {
+      image: imageCard || "",
+      name: nameCard || "",
+      phone: phoneCard || "",
+      date: dateCard || "",
+      dateFormat: dateFormatCard || null,
+      email: emailCard || "",
+      office: officeCard || "",
+      department: departmentCard || "",
+      role: roleCard || "",
+      attendanceProfile: attendanceProfileCard || "",
+      position: positionCard || "",
+      WFH: WFHCard || false,
+      id: idCard || crypto.randomUUID(),
+    };
+  }, [
+    WFHCard,
+    attendanceProfileCard,
+    dateCard,
+    dateFormatCard,
+    departmentCard,
+    emailCard,
+    idCard,
+    imageCard,
+    nameCard,
+    officeCard,
+    phoneCard,
+    positionCard,
+    roleCard,
+  ]);
 
   const { handleAddEmployee } = useEmp();
   const [formEmployee, setFormEmployee] = useState(initialFormValues);
@@ -188,7 +204,7 @@ function EmpForm({
     setFormEmployeeFlags(initialFormFlags);
     setFormEmployeeValidation(initialFormValidation);
     console.log(date, "before");
-    setSelectedDate(selectedDate);
+    setSelectedDate(dateFormat);
     console.log(date, "after");
     setOpen(false);
     form.resetFields();
@@ -221,6 +237,12 @@ function EmpForm({
         break;
     }
   };
+
+  useEffect(() => {
+    setFormEmployee(initialFormValues);
+    console.log(initialFormValues);
+  }, [initialFormValues]);
+
   return (
     <>
       <Modal
@@ -340,7 +362,7 @@ function EmpForm({
                   <DatePicker
                     name="date"
                     className="w-100 "
-                    value={selectedDate}
+                    value={dateFormat}
                     onChange={handleDateChange}
                   />
                 </Space>

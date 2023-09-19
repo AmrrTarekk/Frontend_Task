@@ -26,6 +26,7 @@ function EditForm({ id }) {
     dateFormat,
     WFH,
   } = editableEmployee;
+
   return (
     <div>
       <FontAwesomeIcon

@@ -62,7 +62,7 @@ function EmpForm({
       attendanceProfile: attendanceProfileCard || "",
       position: positionCard || "",
       WFH: WFHCard || false,
-      id: idCard || crypto.randomUUID(),
+      id: idCard,
     };
   }, [
     WFHCard,
@@ -71,7 +71,6 @@ function EmpForm({
     dateFormatCard,
     departmentCard,
     emailCard,
-    idCard,
     imageCard,
     nameCard,
     officeCard,
@@ -203,9 +202,7 @@ function EmpForm({
     setFormEmployee(initialFormValues);
     setFormEmployeeFlags(initialFormFlags);
     setFormEmployeeValidation(initialFormValidation);
-    console.log(date, "before");
     setSelectedDate(dateFormat);
-    console.log(date, "after");
     setOpen(false);
     form.resetFields();
   };

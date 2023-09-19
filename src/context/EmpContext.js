@@ -51,6 +51,7 @@ export const EmpProvider = ({ children }) => {
             attendanceProfile,
             role,
             WFH,
+            id,
           };
         }
         return obj;
@@ -66,7 +67,7 @@ export const EmpProvider = ({ children }) => {
           department,
           position,
           image,
-          id,
+          id: crypto.randomUUID(),
           date,
           dateFormat,
           office,

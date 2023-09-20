@@ -86,7 +86,7 @@ function EmpCards() {
                 </div>
 
                 <div className="present-icons d-flex justify-content-between">
-                  {emp.WFH ? (
+                  {!emp.WFH ? (
                     <div className="Rectangle-1520">
                       <span className="present">Present</span>
                     </div>

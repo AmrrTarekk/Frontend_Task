@@ -91,7 +91,7 @@ function EmpCards() {
                       <span className="present">Present</span>
                     </div>
                   ) : (
-                    <div className="Rectangle-1520">
+                    <div className="Rectangle-1520 text-center">
                       <span className="present">Home</span>
                     </div>
                   )}

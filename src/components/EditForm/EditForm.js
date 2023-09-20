@@ -1,6 +1,5 @@
-import { faPenAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPenAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "antd";
 import { useState } from "react";
 import EmpForm from "../Form/EmpForm";
 import useEmp from "../../hooks/useEmp";
@@ -8,8 +7,11 @@ import useEmp from "../../hooks/useEmp";
 function EditForm({ id }) {
   const [open, setOpen] = useState(false);
   const { filteredEmployee } = useEmp();
+  // const [editableEmployee, setEditableEmployee] = useState({})
 
   const editableEmployee = filteredEmployee.find((emp) => emp.id === id);
+  // console.log(editableEmployee, "emo");
+  console.log("first");
 
   const {
     image,
@@ -23,8 +25,9 @@ function EditForm({ id }) {
     role,
     position,
     dateFormat,
-    // WFH,
+    WFH,
   } = editableEmployee;
+
   return (
     <div>
       <FontAwesomeIcon
@@ -48,6 +51,8 @@ function EditForm({ id }) {
         positionCard={position}
         touched={true}
         valid={true}
+        idCard={id}
+        WFHCard={WFH}
       />
     </div>
   );

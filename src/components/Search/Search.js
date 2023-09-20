@@ -5,6 +5,7 @@ import EmpForm from "../Form/EmpForm";
 import useEmp from "../../hooks/useEmp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import FormModal from "../Form/FormModal";
 
 function Search() {
   const { query, setQuery } = useEmp();
@@ -22,7 +23,7 @@ function Search() {
         onChange={handleSearch}
         prefix={<FontAwesomeIcon icon={faMagnifyingGlass} />}
       />
-      <EmpForm />
+      <FormModal />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import Info from "../Info/Info";
+import EditForm from "../EditForm/EditForm";
 
 function EmpCards() {
   const { filteredEmployee, employees, setEmployees } = useEmp();
@@ -38,7 +39,7 @@ function EmpCards() {
                     />
                     <div className="icons d-flex gap-3 mt-2">
                       <span>
-                        <FontAwesomeIcon title="Edit" icon={faPen} />
+                        <EditForm id={emp.id} />
                       </span>
                       <span>
                         <FontAwesomeIcon icon={faCirclePause} />
@@ -58,7 +59,7 @@ function EmpCards() {
                     />
                     <div className="icons d-flex gap-3 mt-2">
                       <span>
-                        <FontAwesomeIcon title="Edit" icon={faPen} />
+                        <EditForm id={emp.id} />
                       </span>
                       <span>
                         <FontAwesomeIcon icon={faCirclePause} />

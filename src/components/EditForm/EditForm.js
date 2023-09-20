@@ -7,11 +7,8 @@ import useEmp from "../../hooks/useEmp";
 function EditForm({ id }) {
   const [open, setOpen] = useState(false);
   const { filteredEmployee } = useEmp();
-  // const [editableEmployee, setEditableEmployee] = useState({})
 
   const editableEmployee = filteredEmployee.find((emp) => emp.id === id);
-  // console.log(editableEmployee, "emo");
-  console.log("first");
 
   const {
     image,

@@ -121,12 +121,7 @@ function EmpForm({
 
   // handle date input
   const [selectedDate, setSelectedDate] = useState(dateFormat);
-  // useEffect(() => {
-  //   console.log(dateFormat, "format");
-  //   console.log(selectedDate, "selected");
-  // }, [selectedDate]);
   const handleDateChange = (d, dateString) => {
-    // console.log(d);
     setSelectedDate(d);
     setFormEmployee((prev) => ({
       ...prev,
@@ -136,7 +131,6 @@ function EmpForm({
   };
   // handle checkbox
   const handleCheck = (e) => {
-    // console.log(e.target.checked);
     setFormEmployee((prev) => ({
       ...prev,
       WFH: !prev.WFH,
@@ -237,7 +231,6 @@ function EmpForm({
 
   useEffect(() => {
     setFormEmployee(initialFormValues);
-    console.log(initialFormValues);
   }, [initialFormValues]);
 
   return (

@@ -1,13 +1,11 @@
 import React from "react";
-import { Input } from "antd";
-import "./search.css";
-import EmpForm from "../Form/EmpForm";
+import { Button, Input } from "antd";
+import "./HeaderBar.css";
 import useEmp from "../../hooks/useEmp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import FormModal from "../Form/FormModal";
+import { faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-function Search() {
+function HeaderBar({ setOpen }) {
   const { query, setQuery } = useEmp();
 
   const handleSearch = (e) => {
@@ -23,9 +21,16 @@ function Search() {
         onChange={handleSearch}
         prefix={<FontAwesomeIcon icon={faMagnifyingGlass} />}
       />
-      <FormModal />
+      <Button
+        type="primary"
+        className="addNewBtn d-flex flex-row gap-1 align-items-center"
+        onClick={() => setOpen(true)}
+      >
+        <FontAwesomeIcon icon={faPlus} />
+        Add new
+      </Button>
     </div>
   );
 }
 
-export default Search;
+export default HeaderBar;

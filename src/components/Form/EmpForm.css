@@ -107,6 +107,7 @@
   background-color: #23aaeb !important;
   width: 85px;
   height: 30px;
+  padding: 0 15px !important;
 }
 
 .ant-modal-footer .ant-btn-default {
@@ -114,6 +115,7 @@
   color: #fff !important;
   width: 85px;
   height: 30px;
+  padding: 0 15px !important;
 }
 
 .ant-modal-wrap {

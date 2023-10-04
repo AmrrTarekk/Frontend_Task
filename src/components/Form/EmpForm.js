@@ -15,70 +15,35 @@ const REGEX = {
 };
 
 ////////////
-
-function EmpForm({
-  open,
-  setOpen,
-  imageCard,
-  nameCard,
-  phoneCard,
-  dateCard,
-  dateFormatCard,
-  emailCard,
-  officeCard,
-  departmentCard,
-  roleCard,
-  attendanceProfileCard,
-  positionCard,
-  WFHCard,
-  touched,
-  valid,
-  idCard,
-}) {
-  const initialFormFlags = {
-    nameFocus: false,
-    nameTouched: touched || false,
-    phoneFocus: false,
-    phoneTouched: touched || false,
-    emailFocus: false,
-    emailTouched: touched || false,
-  };
-  const initialFormValidation = {
-    nameValid: valid || false,
-    phoneValid: valid || false,
-    emailValid: valid || false,
-  };
-  const initialFormValues = useMemo(() => {
-    return {
-      image: imageCard || "",
-      name: nameCard || "",
-      phone: phoneCard || "",
-      date: dateCard || "",
-      dateFormat: dateFormatCard || null,
-      email: emailCard || "",
-      office: officeCard || "",
-      department: departmentCard || "",
-      role: roleCard || "",
-      attendanceProfile: attendanceProfileCard || "",
-      position: positionCard || "",
-      WFH: WFHCard || false,
-      id: idCard,
-    };
-  }, [
-    WFHCard,
-    attendanceProfileCard,
-    dateCard,
-    dateFormatCard,
-    departmentCard,
-    emailCard,
-    imageCard,
-    nameCard,
-    officeCard,
-    phoneCard,
-    positionCard,
-    roleCard,
-  ]);
-
+const initialFormFlags = {
+  nameFocus: false,
+  nameTouched: false,
+  phoneFocus: false,
+  phoneTouched: false,
+  emailFocus: false,
+  emailTouched: false,
+};
+const initialFormValidation = {
+  nameValid: false,
+  phoneValid: false,
+  emailValid: false,
+};
+const initialFormValues = {
+  image: "",
+  name: "",
+  phone: "",
+  date: "",
+  dateFormat: null,
+  email: "",
+  office: "",
+  department: "",
+  role: "",
+  attendanceProfile: "",
+  position: "",
+  WFH: false,
+  id: null,
+};
+function EmpForm({ open, setOpen, setEditedEmp, ...editedEmp }) {
   const { handleAddEmployee } = useEmp();
   const [formEmployee, setFormEmployee] = useState(initialFormValues);
   const [formEmployeeFlags, setFormEmployeeFlags] = useState(initialFormFlags);
@@ -102,6 +67,15 @@ function EmpForm({
   const { nameTouched, phoneTouched, emailTouched } = formEmployeeFlags;
   const { nameValid, phoneValid, emailValid } = formEmployeeValidation;
 
+  useEffect(() => {
+    if (editedEmp?.id && open) {
+      setFormEmployee((prev) => ({
+        ...prev,
+        ...editedEmp,
+      }));
+    }
+  }, [editedEmp?.id, open]);
+
   // handle image drag&drop
   const handleRemoveImage = () => {
     setFormEmployee((prev) => ({
@@ -121,12 +95,8 @@ function EmpForm({
 
   // handle date input
   const [selectedDate, setSelectedDate] = useState(dateFormat);
-  // useEffect(() => {
-  //   console.log(dateFormat, "format");
-  //   console.log(selectedDate, "selected");
-  // }, [selectedDate]);
+
   const handleDateChange = (d, dateString) => {
-    // console.log(d);
     setSelectedDate(d);
     setFormEmployee((prev) => ({
       ...prev,
@@ -136,7 +106,6 @@ function EmpForm({
   };
   // handle checkbox
   const handleCheck = (e) => {
-    // console.log(e.target.checked);
     setFormEmployee((prev) => ({
       ...prev,
       WFH: !prev.WFH,
@@ -171,14 +140,25 @@ function EmpForm({
       }));
     }
   };
-  const handleFormValidation = (name, value) => {
-    const inp = name.toUpperCase();
-    const result = REGEX[`${inp}_REGEX`].test(value);
-    setFormEmployeeValidation((prev) => ({
-      ...prev,
-      [`${name}Valid`]: result,
-    }));
+  const handleFormValidation = () => {
+    const validation = {};
+    Object.entries(formEmployee).forEach(([name, value]) => {
+      if (Object.keys(formEmployeeValidation).includes(`${name}Valid`)) {
+        const inp = name.toUpperCase();
+        const result = REGEX[`${inp}_REGEX`].test(value);
+        validation[`${name}Valid`] = result;
+        setFormEmployeeValidation((prev) => ({
+          ...prev,
+          ...validation,
+        }));
+      }
+    });
   };
+
+  useEffect(() => {
+    handleFormValidation();
+  }, [name, phone, email]);
+
   const handleSubmit = () => {
     if (department === "" || position === "" || selectedDate === null) {
       setErr(true);
@@ -197,6 +177,7 @@ function EmpForm({
       toast.error("Invalid Email Entry");
       return;
     }
+    handleFormValidation();
     handleAddEmployee(formEmployee);
     toast.success("New Employee Successfully Saved!");
     setFormEmployee(initialFormValues);
@@ -204,6 +185,7 @@ function EmpForm({
     setFormEmployeeValidation(initialFormValidation);
     setSelectedDate(dateFormat);
     setOpen(false);
+    setEditedEmp({});
     form.resetFields();
   };
 
@@ -213,6 +195,7 @@ function EmpForm({
     setFormEmployeeFlags(initialFormFlags);
     setFormEmployeeValidation(initialFormValidation);
     setSelectedDate(dateFormat);
+    setEditedEmp({});
     form.resetFields();
   };
   const handleFormFlags = (e) => {
@@ -234,11 +217,6 @@ function EmpForm({
         break;
     }
   };
-
-  useEffect(() => {
-    setFormEmployee(initialFormValues);
-    console.log(initialFormValues);
-  }, [initialFormValues]);
 
   return (
     <>

@@ -30,7 +30,6 @@ export const EmpProvider = ({ children }) => {
     id,
     WFH,
   }) => {
-    console.log(name, "name");
     name = capitalizeName(name);
 
     const editableEmployee = filteredEmployee.find((emp) => emp.id === id);
@@ -80,7 +79,6 @@ export const EmpProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(employees);
     setFilteredEmployee(
       employees.filter((emp) =>
         emp.name.toLowerCase().startsWith(query.toLowerCase())

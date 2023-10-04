@@ -7,14 +7,13 @@ import {
   faCirclePause,
   faEnvelope,
   faExclamation,
-  faPen,
+  faPenAlt,
   faPhone,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import Info from "../Info/Info";
-import EditForm from "../EditForm/EditForm";
 
-function EmpCards() {
+function EmpCards({ handleEditedEmp }) {
   const { filteredEmployee, employees, setEmployees } = useEmp();
 
   const handleDelete = (id) => {
@@ -29,47 +28,38 @@ function EmpCards() {
           <Card className="Path-120" style={{ width: "24rem" }} key={emp.id}>
             <div className="HR---Employees3 d-flex  ">
               <div>
-                {emp.image ? (
-                  <div className=" d-flex flex-column justify-content-center align-items-center  mt6 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
+                <div className=" d-flex flex-column justify-content-center align-items-center  mt6 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
+                  {emp.image ? (
                     <img
                       alt="cardImage"
                       className=""
                       variant="top"
                       src={URL.createObjectURL(emp.image)}
                     />
-                    <div className="icons d-flex gap-3 mt-2">
-                      <span>
-                        <EditForm id={emp.id} />
-                      </span>
-                      <span>
-                        <FontAwesomeIcon icon={faCirclePause} />
-                      </span>
-                      <span onClick={() => handleDelete(emp.id)}>
-                        <FontAwesomeIcon title="Delete" icon={faTrashCan} />
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className=" d-flex flex-column justify-content-center align-items-center  mt6 Profile-Picture-Pauline-Suy-circle-ScripturaEngage ">
+                  ) : (
                     <img
                       alt="cardImage"
                       className=""
                       variant="top"
                       src="./profile.jpg"
                     />
-                    <div className="icons d-flex gap-3 mt-2">
-                      <span>
-                        <EditForm id={emp.id} />
-                      </span>
-                      <span>
-                        <FontAwesomeIcon icon={faCirclePause} />
-                      </span>
-                      <span onClick={() => handleDelete(emp.id)}>
-                        <FontAwesomeIcon title="Delete" icon={faTrashCan} />
-                      </span>
-                    </div>
+                  )}
+                  <div className="icons d-flex gap-3 mt-2">
+                    <span>
+                      <FontAwesomeIcon
+                        onClick={() => handleEditedEmp(emp)}
+                        title="Edit"
+                        icon={faPenAlt}
+                      />
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faCirclePause} />
+                    </span>
+                    <span onClick={() => handleDelete(emp.id)}>
+                      <FontAwesomeIcon title="Delete" icon={faTrashCan} />
+                    </span>
                   </div>
-                )}
+                </div>
               </div>
               <div className="Line-200"></div>
               <div className="card-info d-flex flex-column w-100">

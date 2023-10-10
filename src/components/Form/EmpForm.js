@@ -6,6 +6,7 @@ import useEmp from "../../hooks/useEmp";
 import { useDropzone } from "react-dropzone";
 
 import { toast } from "react-hot-toast";
+import dayjs from "dayjs";
 
 const REGEX = {
   NAME_REGEX: /^[A-Za-z\u0600-\u06FF\s]*$/,
@@ -33,6 +34,7 @@ const initialFormValues = {
   name: "",
   phone: "",
   date: "",
+  // dateFormat: dayjs("2024/04/11", "YYYY/MM/DD"),
   dateFormat: null,
   email: "",
   office: "",
